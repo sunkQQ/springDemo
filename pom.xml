@@ -222,6 +222,7 @@
 		<module>springDemo-generator</module>
 		<module>springDemo-client</module>
 		<module>springDemo-model</module>
+		<module>springDemo-web-api</module>
 	</modules>
 
 	<packaging>pom</packaging>
