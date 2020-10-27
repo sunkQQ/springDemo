@@ -65,9 +65,17 @@
 		</dependency>
 
 		<!-- 定时任务 -->
+		<dependency>
+			<groupId>com.sunk.demo</groupId>
+			<artifactId>springDemo-quartz</artifactId>
+		</dependency>
 
 		<!-- 代码生成 -->
-
+		<dependency>
+			<groupId>com.sunk.demo</groupId>
+			<artifactId>springDemo-generator</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
