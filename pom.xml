@@ -196,6 +196,20 @@
 				<artifactId>springDemo-common</artifactId>
 				<version>${springDemo.version}</version>
 			</dependency>
+			
+			<!-- 请求接口模块 -->
+			<dependency>
+				<groupId>com.sunk.demo</groupId>
+				<artifactId>springDemo-client</artifactId>
+				<version>${springDemo.version}</version>
+			</dependency>
+			
+			<!--  -->
+			<dependency>
+				<groupId>com.sunk.demo</groupId>
+				<artifactId>springDemo-model</artifactId>
+				<version>${springDemo.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -206,6 +220,8 @@
 		<module>springDemo-system</module>
 		<module>springDemo-quartz</module>
 		<module>springDemo-generator</module>
+		<module>springDemo-client</module>
+		<module>springDemo-model</module>
 	</modules>
 
 	<packaging>pom</packaging>
