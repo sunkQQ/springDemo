@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @date 2020年10月13日
  */
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
-public class SpringDemoApplication {
+public class SpringDemoManagerApplication {
 	
 	private static final String IMG = "\r\n" + 
 			"                   .::::.\r\n" + 
@@ -35,7 +35,7 @@ public class SpringDemoApplication {
 			"";
 	
 	public static void main(String[] args) {
-		SpringApplication.run(SpringDemoApplication.class, args);
+		SpringApplication.run(SpringDemoManagerApplication.class, args);
 		System.out.println(IMG);
 	}
 }

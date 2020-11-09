@@ -25,13 +25,13 @@ public class CaptchaConfig {
 		// 是否有边框 默认为true我们可以自己设置yes，no
 		properties.setProperty(Constants.KAPTCHA_BORDER, "yes");
 		// 验证码文本字符颜色，默认为Color.BLACK
-		properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_COLOR, "orange");
+		properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_COLOR, "red");
 		// 验证码图片宽度，默认为200
-		properties.setProperty(Constants.KAPTCHA_IMAGE_WIDTH, "160");
+		properties.setProperty(Constants.KAPTCHA_IMAGE_WIDTH, "180");
 		// 验证码图片高度，默认为50
 		properties.setProperty(Constants.KAPTCHA_IMAGE_HEIGHT, "60");
 		// 验证码文本字符大小，默认为40
-		properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_SIZE, "38");
+		properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_SIZE, "55");
 		// KAPTCHA_SESSION_KEY
 		properties.setProperty(Constants.KAPTCHA_SESSION_CONFIG_KEY, "kaptchaCode");
 		// 验证码文本字符长度， 默认为5

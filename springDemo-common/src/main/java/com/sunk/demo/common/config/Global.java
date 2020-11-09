@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @date 2020年10月19日
  */
 @Component
-@ConfigurationProperties(prefix = "sunkdemo")
+@ConfigurationProperties(prefix = "springdemo")
 public class Global {
 	/** 项目名称 */
 	private static String name;
