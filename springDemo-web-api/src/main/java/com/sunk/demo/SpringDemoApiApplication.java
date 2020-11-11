@@ -1,5 +1,6 @@
 package com.sunk.demo;
 
+import com.sunk.demo.common.constant.StringConstants;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -14,8 +15,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class SpringDemoApiApplication {
 
 	public static void main(String[] args) {
-		System.out.println("Api启动=======》start");
 		SpringApplication.run(SpringDemoApiApplication.class, args);
-		System.out.println("Api启动=======》end");
+		System.out.println(StringConstants.IMG);
 	}
+
+
+
 }
