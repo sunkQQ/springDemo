@@ -64,7 +64,7 @@ public interface SysConfigService {
 	/**
 	 * 清空缓存数据
 	 */
-	public void clearCache();
+//	public void clearCache();
 
 	/**
 	 * 校验参数键名是否唯一

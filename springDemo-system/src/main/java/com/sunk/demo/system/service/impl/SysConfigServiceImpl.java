@@ -31,13 +31,13 @@ public class SysConfigServiceImpl implements SysConfigService {
 	/**
 	 * 项目启动时，初始化参数到缓存
 	 */
-	@PostConstruct
+	/*@PostConstruct
 	public void init() {
 		List<SysConfig> configsList = configMapper.selectConfigList(new SysConfig());
 		for (SysConfig config : configsList) {
 			CacheUtils.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
 		}
-	}
+	}*/
 
 	/**
 	 * 查询参数配置信息
@@ -60,15 +60,15 @@ public class SysConfigServiceImpl implements SysConfigService {
 	 */
 	@Override
 	public String selectConfigByKey(String configKey) {
-		String configValue = Convert.toStr(CacheUtils.get(getCacheName(), getCacheKey(configKey)));
+		/*String configValue = Convert.toStr(CacheUtils.get(getCacheName(), getCacheKey(configKey)));
 		if (StringUtils.isNotEmpty(configValue)) {
 			return configValue;
-		}
+		}*/
 		SysConfig config = new SysConfig();
 		config.setConfigKey(configKey);
 		SysConfig retConfig = configMapper.selectConfig(config);
 		if (StringUtils.isNotNull(retConfig)) {
-			CacheUtils.put(getCacheName(), getCacheKey(configKey), retConfig.getConfigValue());
+//			CacheUtils.put(getCacheName(), getCacheKey(configKey), retConfig.getConfigValue());
 			return retConfig.getConfigValue();
 		}
 		return StringUtils.EMPTY;
@@ -94,9 +94,9 @@ public class SysConfigServiceImpl implements SysConfigService {
 	@Override
 	public int insertConfig(SysConfig config) {
 		int row = configMapper.insertConfig(config);
-		if (row > 0) {
+		/*if (row > 0) {
 			CacheUtils.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
-		}
+		}*/
 		return row;
 	}
 
@@ -109,9 +109,9 @@ public class SysConfigServiceImpl implements SysConfigService {
 	@Override
 	public int updateConfig(SysConfig config) {
 		int row = configMapper.updateConfig(config);
-		if (row > 0) {
+		/*if (row > 0) {
 			CacheUtils.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
-		}
+		}*/
 		return row;
 	}
 
@@ -124,20 +124,20 @@ public class SysConfigServiceImpl implements SysConfigService {
 	@Override
 	public int deleteConfigByIds(String ids) {
 		int count = configMapper.deleteConfigByIds(Convert.toStrArray(ids));
-		if (count > 0) {
+		/*if (count > 0) {
 
 			CacheUtils.removeAll(getCacheName());
-		}
+		}*/
 		return count;
 	}
 
 	/**
 	 * 清空缓存数据
 	 */
-	@Override
+	/*@Override
 	public void clearCache() {
 		CacheUtils.removeAll(getCacheName());
-	}
+	}*/
 
 	/**
 	 * 校验参数键名是否唯一
