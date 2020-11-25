@@ -2,7 +2,7 @@ package com.sunk.demo.web.controller.monitor;
 
 import java.util.List;
 
-import com.sunk.demo.framework.shiro.service.SysPasswordService;
+import com.sunk.demo.shiro.service.SysPasswordService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
 package com.sunk.demo.web.controller.system;
 
-import com.sunk.demo.framework.shiro.service.SysPasswordService;
-import com.sunk.demo.framework.util.ShiroUtils;
+import com.sunk.demo.shiro.service.SysPasswordService;
+import com.sunk.demo.util.ShiroUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

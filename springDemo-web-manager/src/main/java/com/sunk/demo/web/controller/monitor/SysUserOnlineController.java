@@ -2,9 +2,9 @@ package com.sunk.demo.web.controller.monitor;
 
 import java.util.List;
 
-import com.sunk.demo.framework.shiro.session.OnlineSession;
-import com.sunk.demo.framework.shiro.session.OnlineSessionDAO;
-import com.sunk.demo.framework.util.ShiroUtils;
+import com.sunk.demo.shiro.session.OnlineSession;
+import com.sunk.demo.shiro.session.OnlineSessionDAO;
+import com.sunk.demo.util.ShiroUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

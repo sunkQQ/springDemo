@@ -38,7 +38,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 
 	/**
 	 * 项目启动时，初始化字典到缓存
-	 */
+	 *//*
 	@PostConstruct
 	public void init() {
 		List<SysDictType> dictTypeList = dictTypeMapper.selectDictTypeAll();
@@ -46,7 +46,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 			List<SysDictData> dictDatas = dictDataMapper.selectDictDataByType(dictType.getDictType());
 			DictUtils.setDictCache(dictType.getDictType(), dictDatas);
 		}
-	}
+	}*/
 
 	/**
 	 * 根据条件分页查询字典类型
@@ -77,13 +77,13 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 	 */
 	@Override
 	public List<SysDictData> selectDictDataByType(String dictType) {
-		List<SysDictData> dictDatas = DictUtils.getDictCache(dictType);
+		/*List<SysDictData> dictDatas = DictUtils.getDictCache(dictType);
 		if (StringUtils.isNotNull(dictDatas)) {
 			return dictDatas;
-		}
-		dictDatas = dictDataMapper.selectDictDataByType(dictType);
+		}*/
+		List<SysDictData> dictDatas = dictDataMapper.selectDictDataByType(dictType);
 		if (StringUtils.isNotNull(dictDatas)) {
-			DictUtils.setDictCache(dictType, dictDatas);
+//			DictUtils.setDictCache(dictType, dictDatas);
 			return dictDatas;
 		}
 		return null;
@@ -127,9 +127,9 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 			}
 		}
 		int count = dictTypeMapper.deleteDictTypeByIds(dictIds);
-		if (count > 0) {
+		/*if (count > 0) {
 			DictUtils.clearDictCache();
-		}
+		}*/
 		return count;
 	}
 
@@ -138,7 +138,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 	 */
 	@Override
 	public void clearCache() {
-		DictUtils.clearDictCache();
+		/*DictUtils.clearDictCache();*/
 	}
 
 	/**
@@ -150,9 +150,9 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 	@Override
 	public int insertDictType(SysDictType dictType) {
 		int row = dictTypeMapper.insertDictType(dictType);
-		if (row > 0) {
+		/*if (row > 0) {
 			DictUtils.clearDictCache();
-		}
+		}*/
 		return row;
 	}
 
@@ -168,9 +168,9 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 		SysDictType oldDict = dictTypeMapper.selectDictTypeById(dictType.getDictId());
 		dictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());
 		int row = dictTypeMapper.updateDictType(dictType);
-		if (row > 0) {
+		/*if (row > 0) {
 			DictUtils.clearDictCache();
-		}
+		}*/
 		return row;
 	}
 

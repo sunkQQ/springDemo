@@ -1,6 +1,7 @@
 package com.sunk.demo;
 
 import com.sunk.demo.common.constant.StringConstants;
+import org.apache.shiro.cache.CacheManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
