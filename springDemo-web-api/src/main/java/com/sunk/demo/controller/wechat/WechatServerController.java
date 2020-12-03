@@ -1,11 +1,15 @@
 package com.sunk.demo.controller.wechat;
 
+import com.sunk.demo.common.constant.NumberConstants;
 import com.sunk.demo.common.constant.WechatConsts;
 import com.sunk.demo.common.exception.AesException;
 import com.sunk.demo.common.utils.security.SHA1Util;
 import com.sunk.demo.model.param.wechat.CheckModel;
 import com.sunk.demo.model.param.wechat.WechatXmlOper;
 import com.sunk.demo.model.param.wechat.message.response.TextResponseMessage;
+import com.sunk.demo.wechat.domain.WechatConfig;
+import com.sunk.demo.wechat.service.IWechatConfigService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +33,8 @@ public class WechatServerController {
 
     @Value(value = "${wx.token}")
     private String wxToken;
+    @Autowired
+    private IWechatConfigService wechatConfigService;
 
     /**
      * 开发者验证token校验
@@ -38,8 +45,13 @@ public class WechatServerController {
     @RequestMapping(value = "/api/validate", method = RequestMethod.GET)
     public String validate(CheckModel tokenModel) {
         String signature = tokenModel.getSignature();
+        List<WechatConfig> configList =  wechatConfigService.selectWechatConfigList(new WechatConfig());
+        if (configList == null || configList.size() == NumberConstants.INT_0){
+            return "error";
+        }
         try {
-            String sign = SHA1Util.getSHA1("123456", tokenModel.getTimestamp(), tokenModel.getNonce());
+            WechatConfig wechatConfig = configList.get(NumberConstants.INT_0);
+            String sign = SHA1Util.getSHA1(wechatConfig.getToken(), tokenModel.getTimestamp(), tokenModel.getNonce());
             if (sign.equalsIgnoreCase(signature)) {
                 return tokenModel.getEchostr();
             }
@@ -80,7 +92,7 @@ public class WechatServerController {
             } else if (msgType.equalsIgnoreCase(WechatConsts.MESSAGE_TYPE_EVENT)) {
                 /* 事件推送 */
                 // 事件类型，subscribe(订阅)、unsubscribe(取消订阅)
-                String event = requestMap.get(WechatConsts.MESSAGE_TYPE_EVENT_LOWER);
+                String event = requestMap.get(WechatConsts.MESSAGE_TYPE_EVENT);
                 if (event.equalsIgnoreCase(WechatConsts.EVENT_TYPE_SUBSCRIBE)){
                     /* 订阅 */
                     // 事件KEY值，qrscene_为前缀，后面为二维码的参数值
@@ -90,6 +102,13 @@ public class WechatServerController {
                         /* 用户未关注时，进行关注后的事件推送 */
                         // 二维码的ticket，可用来换取二维码图片
                         String ticket = requestMap.get(WechatConsts.TICKET);
+                    } else {
+                        List<WechatConfig> configList =  wechatConfigService.selectWechatConfigList(new WechatConfig());
+                        if (configList == null || configList.size() == NumberConstants.INT_0){
+                            return "error";
+                        }
+                        WechatConfig wechatConfig = configList.get(NumberConstants.INT_0);
+                        textResponseMessage.setContent(wechatConfig.getReplaycontent());
                     }
                 } else if (event.equalsIgnoreCase(WechatConsts.EVENT_QRCODE_SCAN)){
                     /* 描带参数二维码事件 */

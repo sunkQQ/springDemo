@@ -118,9 +118,3 @@ xss:
   excludes: /system/notice/*
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
-
-wx:
-  app:
-    id: wxa6eef4c10370ab5d
-    secret: 03760c3a9708f4ea87b53df47ccc9cb5
-  token: 123456

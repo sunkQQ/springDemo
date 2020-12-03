@@ -20,13 +20,6 @@ public interface IWechatConfigService {
     public WechatConfig selectWechatConfigById(Long id);
 
     /**
-     * 根据appid查询
-     * @param appId appid
-     * @return 公众号设置
-     */
-    public WechatConfig selectWechatConfigByAppId(String appId);
-
-    /**
      * 查询公众号设置列表
      * 
      * @param wechatConfig 公众号设置

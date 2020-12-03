@@ -8,6 +8,7 @@ import com.sunk.demo.common.enums.BusinessType;
 import com.sunk.demo.common.utils.poi.ExcelUtil;
 import com.sunk.demo.wechat.domain.WechatConfig;
 import com.sunk.demo.wechat.service.IWechatConfigService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,8 +80,12 @@ public class WechatConfigController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(WechatConfig wechatConfig) {
-//        AjaxResult.err
-//        if ()
+        WechatConfig query = new WechatConfig();
+        query.setAppId(wechatConfig.getAppId());
+        List<WechatConfig> configList = wechatConfigService.selectWechatConfigList(query);
+        if (CollectionUtils.isNotEmpty(configList)) {
+            return AjaxResult.error("appId已经存在");
+        }
         return toAjax(wechatConfigService.insertWechatConfig(wechatConfig));
     }
 
