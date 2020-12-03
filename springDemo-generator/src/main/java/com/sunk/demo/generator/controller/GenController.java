@@ -1,24 +1,5 @@
 package com.sunk.demo.generator.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.sunk.demo.common.annotation.Log;
 import com.sunk.demo.common.core.controller.BaseController;
@@ -33,6 +14,19 @@ import com.sunk.demo.generator.domain.GenTable;
 import com.sunk.demo.generator.domain.GenTableColumn;
 import com.sunk.demo.generator.service.GenTableColumnService;
 import com.sunk.demo.generator.service.GenTableService;
+import org.apache.commons.io.IOUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 代码生成 操作处理
@@ -209,7 +203,7 @@ public class GenController extends BaseController {
 	 */
 	private void genCode(HttpServletResponse response, byte[] data) throws IOException {
 		response.reset();
-		response.setHeader("Content-Disposition", "attachment; filename=\"ruoyi.zip\"");
+		response.setHeader("Content-Disposition", "attachment; filename=\"demo.zip\"");
 		response.addHeader("Content-Length", "" + data.length);
 		response.setContentType("application/octet-stream; charset=UTF-8");
 		IOUtils.write(data, response.getOutputStream());

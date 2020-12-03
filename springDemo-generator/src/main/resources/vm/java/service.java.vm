@@ -3,7 +3,7 @@ package ${packageName}.service;
 import java.util.List;
 import ${packageName}.domain.${ClassName};
 #if($table.tree)
-import com.ruoyi.common.core.domain.Ztree;
+import com.sunk.demo.common.core.domain.Ztree;
 #end
 
 /**
@@ -12,8 +12,7 @@ import com.ruoyi.common.core.domain.Ztree;
  * @author ${author}
  * @date ${datetime}
  */
-public interface I${ClassName}Service 
-{
+public interface I${ClassName}Service {
     /**
      * 查询${functionName}
      * 
