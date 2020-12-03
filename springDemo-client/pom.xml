@@ -17,5 +17,10 @@
 			<groupId>com.sunk.demo</groupId>
 			<artifactId>springDemo-common</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.sunk.demo</groupId>
+			<artifactId>springDemo-model</artifactId>
+		</dependency>
 	</dependencies>
 </project>

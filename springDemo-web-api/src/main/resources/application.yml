@@ -120,4 +120,7 @@ xss:
   urlPatterns: /system/*,/monitor/*,/tool/*
 
 wx:
+  app:
+    id:
+    secret:
   token: 123456

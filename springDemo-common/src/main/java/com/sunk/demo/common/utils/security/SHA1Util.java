@@ -13,13 +13,13 @@ import java.util.Arrays;
  */
 public class SHA1Util {
 
-    public static String getSHA1(String token, String timestamp, String nonce, String encrypt) throws AesException {
+    public static String getSHA1(String token, String timestamp, String nonce) throws AesException {
         try {
-            String[] array = new String[]{token, timestamp, nonce, encrypt};
+            String[] array = new String[]{token, timestamp, nonce};
             StringBuffer sb = new StringBuffer();
             // 字符串排序
             Arrays.sort(array);
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < array.length; i++) {
                 sb.append(array[i]);
             }
             String str = sb.toString();
@@ -43,4 +43,6 @@ public class SHA1Util {
             throw new AesException(AesException.ComputeSignatureError);
         }
     }
+
+
 }

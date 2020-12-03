@@ -27,6 +27,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<bitwalker.version>1.19</bitwalker.version>
 		<lombok.version>1.18.14</lombok.version>
+		<dem4j.version>1.6.1</dem4j.version>
 	</properties>
 
 	<dependencyManagement>
