@@ -1,8 +1,9 @@
 package com.sunk.demo.system.service;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.sunk.demo.system.domain.SysConfig;
+
+import java.util.List;
 
 /**
  * 参数配置 服务层
@@ -11,11 +12,11 @@ import com.sunk.demo.system.domain.SysConfig;
  * @date 2020年10月22日
  */
 
-public interface SysConfigService {
+public interface SysConfigService extends IService<SysConfig> {
 
 	/**
 	 * 查询参数配置信息
-	 * 
+	 *
 	 * @param configId 参数配置ID
 	 * @return 参数配置信息
 	 */
@@ -39,7 +40,7 @@ public interface SysConfigService {
 
 	/**
 	 * 新增参数配置
-	 * 
+	 *
 	 * @param config 参数配置信息
 	 * @return 结果
 	 */
@@ -47,7 +48,7 @@ public interface SysConfigService {
 
 	/**
 	 * 修改参数配置
-	 * 
+	 *
 	 * @param config 参数配置信息
 	 * @return 结果
 	 */

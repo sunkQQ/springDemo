@@ -70,6 +70,16 @@ public class Constants {
 	public static final String IS_ASC = "isAsc";
 
 	/**
+	 * 查询开始时间
+	 */
+	public static final String BEGIN_TIME = "beginTime";
+
+	/**
+	 * 查询结束时间
+	 */
+	public static final String END_TIME = "endTime";
+
+	/**
 	 * 参数管理 cache name
 	 */
 	public static final String SYS_CONFIG_CACHE = "sys-config";

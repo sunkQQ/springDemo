@@ -1,5 +1,6 @@
 package com.sunk.demo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @author sunk
  * @date 2020年10月13日
  */
+@Slf4j
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 public class SpringDemoManagerApplication {
 	

@@ -27,6 +27,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<bitwalker.version>1.19</bitwalker.version>
 		<lombok.version>1.18.14</lombok.version>
+		<mybatis.plus.version>3.0.7.1</mybatis.plus.version>
 	</properties>
 
 	<dependencyManagement>
@@ -101,6 +102,12 @@
 				<groupId>com.github.oshi</groupId>
 				<artifactId>oshi-core</artifactId>
 				<version>${oshi.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis.plus.version}</version>
 			</dependency>
 
 			<!-- swagger2 -->

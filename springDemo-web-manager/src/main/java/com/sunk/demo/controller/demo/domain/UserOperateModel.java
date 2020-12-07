@@ -1,11 +1,11 @@
 package com.sunk.demo.controller.demo.domain;
 
-import java.util.Date;
-
 import com.sunk.demo.common.annotation.Excel;
 import com.sunk.demo.common.annotation.Excel.Type;
 import com.sunk.demo.common.core.domain.BaseEntity;
 import com.sunk.demo.common.utils.DateUtils;
+
+import java.util.Date;
 
 /**
  * 
@@ -125,13 +125,4 @@ public class UserOperateModel extends BaseEntity {
 		this.status = status;
 	}
 
-	@Override
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	@Override
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
 }

@@ -1,12 +1,8 @@
 package com.sunk.demo.common.utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import com.sunk.demo.common.core.text.StrFormatter;
+
+import java.util.*;
 
 /**
  * 字符串工具类
@@ -135,6 +131,18 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 */
 	public static boolean isNotEmpty(String str) {
 		return !isEmpty(str);
+	}
+
+	/**
+	 * 判断一个对象是否是空或空串
+	 * @param obj
+	 * @return
+	 */
+	public static boolean isNotEmpty(Object obj){
+		if (obj == null){
+			return false;
+		}
+		return isNotEmpty(obj.toString());
 	}
 
 	/**
