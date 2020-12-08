@@ -59,4 +59,9 @@ public enum BusinessType {
 	 * 清空
 	 */
 	CLEAN,
+
+	/**
+	 * 接口
+	 */
+	INTERFACE,
 }

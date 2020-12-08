@@ -1,5 +1,6 @@
 package com.sunk.demo;
 
+import com.sunk.demo.common.constant.StringConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,29 +16,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 public class SpringDemoManagerApplication {
 	
-	private static final String IMG = "\r\n" + 
-			"                   .::::.\r\n" + 
-			"                 .::::::::.\r\n" + 
-			"                :::::::::::\r\n" + 
-			"            ..:::::::::::'\r\n" + 
-			"          '::::::::::::'\r\n" + 
-			"            .::::::::::\r\n" + 
-			"       '::::::::::::::..\r\n" + 
-			"            ..::::::::::::.\r\n" + 
-			"          ``::::::::::::::::\r\n" + 
-			"           ::::``:::::::::'        .:::.\r\n" + 
-			"          ::::'   ':::::'       .::::::::.\r\n" + 
-			"        .::::'      ::::     .:::::::'::::.\r\n" + 
-			"       .:::'       :::::  .:::::::::' ':::::.\r\n" + 
-			"      .::'        :::::.:::::::::'      ':::::.\r\n" + 
-			"     .::'         ::::::::::::::'         ``::::.\r\n" + 
-			" ...:::           ::::::::::::'              ``::.\r\n" + 
-			"```` ':.          ':::::::::'                  ::::..\r\n" + 
-			"                   '.:::::'                    ':'````..\r\n" + 
-			"";
-	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDemoManagerApplication.class, args);
-		System.out.println(IMG);
+		System.out.println(StringConstants.IMG);
 	}
 }

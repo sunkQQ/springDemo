@@ -1,13 +1,18 @@
 package com.sunk.demo.framework.config;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import javax.servlet.Filter;
-
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import com.sunk.demo.common.utils.StringUtils;
+import com.sunk.demo.common.utils.spring.SpringUtils;
+import com.sunk.demo.framework.shiro.realm.UserRealm;
+import com.sunk.demo.framework.shiro.session.OnlineSessionDAO;
+import com.sunk.demo.framework.shiro.session.OnlineSessionFactory;
+import com.sunk.demo.framework.shiro.web.filter.LogoutFilter;
+import com.sunk.demo.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
+import com.sunk.demo.framework.shiro.web.filter.kickout.KickoutSessionFilter;
+import com.sunk.demo.framework.shiro.web.filter.online.OnlineSessionFilter;
+import com.sunk.demo.framework.shiro.web.filter.sync.SyncOnlineSessionFilter;
+import com.sunk.demo.framework.shiro.web.session.OnlineWebSessionManager;
+import com.sunk.demo.framework.shiro.web.session.SpringSessionValidationScheduler;
 import org.apache.poi.util.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -24,20 +29,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.sunk.demo.common.utils.StringUtils;
-import com.sunk.demo.common.utils.spring.SpringUtils;
-import com.sunk.demo.framework.shiro.realm.UserRealm;
-import com.sunk.demo.framework.shiro.session.OnlineSessionDAO;
-import com.sunk.demo.framework.shiro.session.OnlineSessionFactory;
-import com.sunk.demo.framework.shiro.web.filter.LogoutFilter;
-import com.sunk.demo.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
-import com.sunk.demo.framework.shiro.web.filter.kickout.KickoutSessionFilter;
-import com.sunk.demo.framework.shiro.web.filter.online.OnlineSessionFilter;
-import com.sunk.demo.framework.shiro.web.filter.sync.SyncOnlineSessionFilter;
-import com.sunk.demo.framework.shiro.web.session.OnlineWebSessionManager;
-import com.sunk.demo.framework.shiro.web.session.SpringSessionValidationScheduler;
-
-import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import javax.servlet.Filter;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * 权限配置加载
@@ -236,6 +233,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/ajax/**", "anon");
 		filterChainDefinitionMap.put("/js/**", "anon");
 		filterChainDefinitionMap.put("/ruoyi/**", "anon");
+		filterChainDefinitionMap.put("/api/**", "anon");
 		filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
 		// 退出 logout地址，shiro去清除session
 		filterChainDefinitionMap.put("/logout", "logout");

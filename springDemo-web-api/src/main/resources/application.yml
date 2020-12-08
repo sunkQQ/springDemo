@@ -130,14 +130,20 @@ shiro:
     # 踢出之前登录的/之后登录的用户，默认踢出之前的登录的用户
     kickoutAfter: false
 
-# MyBatis
-mybatis:
-  # 搜索指定包别名
-  typeAliasesPackage: com.sunk.demo.**.domain
-  # 配置 mapper的扫描，找到所有的mapper.xml映射文件
-  mapperLocations: classpath*:mapper/**/*Mapper.xml
-  # 加载全局的配置文件
-  configLocation: classpath:mybatis/mybatis-config.xml
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  # 实体扫描，多个package用逗号或分号分隔
+  type-aliases-package: com.sunk.demo
+  global-config:
+    #数据库相关配置
+    db-config:
+      # 主键类型 AUTO:"数据库自增" input： 用户输入ID id_worker:"全局唯一ID(数字类型唯一)"， uuid：‘全局唯一id uuid’
+      id-type: auto
+      # 字段策略 IGNORED:"忽略判断"， not_null:"非NUll判断"， not_empty:"非空判断"
+      field-strategy: not_null
+  configuration:
+    # 是否开启驼峰命名规则
+    map-underscore-to-camel-case: true
 
 # PageHelper分页插件
 pagehelper:

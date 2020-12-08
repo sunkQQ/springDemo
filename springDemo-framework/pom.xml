@@ -90,5 +90,10 @@
 			<groupId>net.java.dev.jna</groupId>
 			<artifactId>jna-platform</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.sunk.demo</groupId>
+			<artifactId>springDemo-model</artifactId>
+		</dependency>
 	</dependencies>
 </project>
