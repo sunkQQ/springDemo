@@ -1,17 +1,16 @@
 package com.sunk.demo.system.domain;
 
-import java.util.Date;
-import java.util.List;
+import com.sunk.demo.common.annotation.Excel;
+import com.sunk.demo.common.annotation.Excel.ColumnType;
+import com.sunk.demo.common.annotation.Excel.Type;
+import com.sunk.demo.common.annotation.Excels;
+import com.sunk.demo.common.core.domain.BaseEntity;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.sunk.demo.common.annotation.Excel;
-import com.sunk.demo.common.annotation.Excels;
-import com.sunk.demo.common.annotation.Excel.ColumnType;
-import com.sunk.demo.common.annotation.Excel.Type;
-import com.sunk.demo.common.core.domain.BaseEntity;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 用户对象 sys_user
@@ -97,6 +96,8 @@ public class SysUser extends BaseEntity {
 
     /** 岗位组 */
     private Long[] postIds;
+
+    private String remark;
 
 	public SysUser() {
 
@@ -291,4 +292,11 @@ public class SysUser extends BaseEntity {
         this.postIds = postIds;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

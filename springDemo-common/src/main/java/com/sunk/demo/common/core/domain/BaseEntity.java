@@ -52,9 +52,6 @@ public class BaseEntity implements Serializable {
 	@TableField(value = "update_time",fill = FieldFill.UPDATE)
 	private Date updateTime;
 
-	/** 备注 */
-	private String remark;
-
 	/** 请求参数 */
 	@TableField(exist=false)
 	private Map<String, Object> params;

@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunk.demo.wechat.mapper.WechatConfigMapper">
     
-    <resultMap type="WechatConfig" id="WechatConfigResult">
+    <resultMap type="com.sunk.demo.wechat.domain.WechatConfig" id="BaseResultMap">
         <result property="id"    column="id"    />
         <result property="appId"    column="app_id"    />
         <result property="appSecret"    column="app_secret"    />
@@ -19,84 +19,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
-    <sql id="selectWechatConfigVo">
-        select id, app_id, app_secret, wx_name, wx_wechat_code, token, status, replayContent, create_by, create_time, update_by, update_time from wechat_config
+    <sql id="Base_Column_List">
+        id, app_id, app_secret, wx_name, wx_wechat_code, token, status, replayContent, create_by, create_time,
+        update_by, update_time
     </sql>
-
-    <select id="selectWechatConfigList" parameterType="WechatConfig" resultMap="WechatConfigResult">
-        <include refid="selectWechatConfigVo"/>
-        <where>  
-            <if test="appId != null  and appId != ''"> and app_id = #{appId}</if>
-            <if test="wxName != null  and wxName != ''"> and wx_name like concat('%', #{wxName}, '%')</if>
-            <if test="wxWechatCode != null  and wxWechatCode != ''"> and wx_wechat_code = #{wxWechatCode}</if>
-            <if test="status != null "> and status = #{status}</if>
-        </where>
-    </select>
-    
-    <select id="selectWechatConfigById" parameterType="Long" resultMap="WechatConfigResult">
-        <include refid="selectWechatConfigVo"/>
-        where id = #{id}
-    </select>
-        
-    <insert id="insertWechatConfig" parameterType="WechatConfig">
-        insert into wechat_config
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
-            <if test="appId != null">app_id,</if>
-            <if test="appSecret != null">app_secret,</if>
-            <if test="wxName != null">wx_name,</if>
-            <if test="wxWechatCode != null">wx_wechat_code,</if>
-            <if test="token != null">token,</if>
-            <if test="status != null">status,</if>
-            <if test="replaycontent != null">replayContent,</if>
-            <if test="createBy != null">create_by,</if>
-            <if test="createTime != null">create_time,</if>
-            <if test="updateBy != null">update_by,</if>
-            <if test="updateTime != null">update_time,</if>
-         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
-            <if test="appId != null">#{appId},</if>
-            <if test="appSecret != null">#{appSecret},</if>
-            <if test="wxName != null">#{wxName},</if>
-            <if test="wxWechatCode != null">#{wxWechatCode},</if>
-            <if test="token != null">#{token},</if>
-            <if test="status != null">#{status},</if>
-            <if test="replaycontent != null">#{replaycontent},</if>
-            <if test="createBy != null">#{createBy},</if>
-            <if test="createTime != null">#{createTime},</if>
-            <if test="updateBy != null">#{updateBy},</if>
-            <if test="updateTime != null">#{updateTime},</if>
-         </trim>
-    </insert>
-
-    <update id="updateWechatConfig" parameterType="WechatConfig">
-        update wechat_config
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="appId != null">app_id = #{appId},</if>
-            <if test="appSecret != null">app_secret = #{appSecret},</if>
-            <if test="wxName != null">wx_name = #{wxName},</if>
-            <if test="wxWechatCode != null">wx_wechat_code = #{wxWechatCode},</if>
-            <if test="token != null">token = #{token},</if>
-            <if test="status != null">status = #{status},</if>
-            <if test="replaycontent != null">replayContent = #{replaycontent},</if>
-            <if test="createBy != null">create_by = #{createBy},</if>
-            <if test="createTime != null">create_time = #{createTime},</if>
-            <if test="updateBy != null">update_by = #{updateBy},</if>
-            <if test="updateTime != null">update_time = #{updateTime},</if>
-        </trim>
-        where id = #{id}
-    </update>
-
-    <delete id="deleteWechatConfigById" parameterType="Long">
-        delete from wechat_config where id = #{id}
-    </delete>
-
-    <delete id="deleteWechatConfigByIds" parameterType="String">
-        delete from wechat_config where id in 
-        <foreach item="id" collection="array" open="(" separator="," close=")">
-            #{id}
-        </foreach>
-    </delete>
 
 </mapper>

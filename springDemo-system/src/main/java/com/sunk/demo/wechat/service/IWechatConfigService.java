@@ -1,5 +1,6 @@
 package com.sunk.demo.wechat.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.sunk.demo.wechat.domain.WechatConfig;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @author sunk
  * @date 2020-12-03
  */
-public interface IWechatConfigService {
+public interface IWechatConfigService extends IService<WechatConfig> {
     /**
      * 查询公众号设置
      * 

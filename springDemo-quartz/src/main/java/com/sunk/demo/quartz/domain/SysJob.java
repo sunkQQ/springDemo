@@ -1,17 +1,16 @@
 package com.sunk.demo.quartz.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import com.sunk.demo.common.annotation.Excel;
 import com.sunk.demo.common.annotation.Excel.ColumnType;
 import com.sunk.demo.common.constant.ScheduleConstants;
 import com.sunk.demo.common.core.domain.BaseEntity;
 import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.quartz.utils.CronUtils;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 定时任务调度表 sys_job
@@ -55,6 +54,9 @@ public class SysJob extends BaseEntity implements Serializable {
 	/** 任务状态（0正常 1暂停） */
 	@Excel(name = "任务状态", readConverterExp = "0=正常,1=暂停")
 	private String status;
+
+	/** 备注 */
+	private String remark;
 
 	public Long getJobId() {
 		return jobId;
@@ -131,5 +133,13 @@ public class SysJob extends BaseEntity implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 }

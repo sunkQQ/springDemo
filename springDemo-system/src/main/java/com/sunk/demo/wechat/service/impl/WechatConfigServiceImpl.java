@@ -1,15 +1,18 @@
 package com.sunk.demo.wechat.service.impl;
 
-import com.sunk.demo.common.core.text.Convert;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sunk.demo.common.enums.TableNameEnum;
 import com.sunk.demo.common.utils.DateUtils;
 import com.sunk.demo.common.utils.GenerateNoUtil;
+import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.wechat.domain.WechatConfig;
 import com.sunk.demo.wechat.mapper.WechatConfigMapper;
 import com.sunk.demo.wechat.service.IWechatConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,7 +22,8 @@ import java.util.List;
  * @date 2020-12-03
  */
 @Service
-public class WechatConfigServiceImpl implements IWechatConfigService {
+public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, WechatConfig> implements IWechatConfigService {
+
     @Autowired
     private WechatConfigMapper wechatConfigMapper;
 
@@ -31,7 +35,7 @@ public class WechatConfigServiceImpl implements IWechatConfigService {
      */
     @Override
     public WechatConfig selectWechatConfigById(Long id) {
-        return wechatConfigMapper.selectWechatConfigById(id);
+        return wechatConfigMapper.selectById(id);
     }
 
     /**
@@ -42,7 +46,22 @@ public class WechatConfigServiceImpl implements IWechatConfigService {
      */
     @Override
     public List<WechatConfig> selectWechatConfigList(WechatConfig wechatConfig) {
-        return wechatConfigMapper.selectWechatConfigList(wechatConfig);
+        LambdaQueryWrapper<WechatConfig> wrapper = new LambdaQueryWrapper<>();
+        if (wechatConfig != null){
+            if (StringUtils.isNotEmpty(wechatConfig.getAppId())){
+                wrapper.eq(WechatConfig::getAppId, wechatConfig.getAppId());
+            }
+            if (StringUtils.isNotEmpty(wechatConfig.getWxName())) {
+                wrapper.like(WechatConfig::getWxName, wechatConfig.getWxName());
+            }
+            if (StringUtils.isNotEmpty(wechatConfig.getWxWechatCode())) {
+                wrapper.eq(WechatConfig::getWxWechatCode, wechatConfig.getWxWechatCode());
+            }
+            if (wechatConfig.getStatus() != null) {
+                wrapper.eq(WechatConfig::getStatus, wechatConfig.getStatus());
+            }
+        }
+        return wechatConfigMapper.selectList(wrapper);
     }
 
     /**
@@ -55,7 +74,7 @@ public class WechatConfigServiceImpl implements IWechatConfigService {
     public int insertWechatConfig(WechatConfig wechatConfig) {
         wechatConfig.setId(GenerateNoUtil.getNextIDValue(TableNameEnum.WECHAT_CONFIG));
         wechatConfig.setCreateTime(DateUtils.getNowDate());
-        return wechatConfigMapper.insertWechatConfig(wechatConfig);
+        return wechatConfigMapper.insert(wechatConfig);
     }
 
     /**
@@ -67,7 +86,7 @@ public class WechatConfigServiceImpl implements IWechatConfigService {
     @Override
     public int updateWechatConfig(WechatConfig wechatConfig) {
         wechatConfig.setUpdateTime(DateUtils.getNowDate());
-        return wechatConfigMapper.updateWechatConfig(wechatConfig);
+        return wechatConfigMapper.updateById(wechatConfig);
     }
 
     /**
@@ -78,7 +97,7 @@ public class WechatConfigServiceImpl implements IWechatConfigService {
      */
     @Override
     public int deleteWechatConfigByIds(String ids) {
-        return wechatConfigMapper.deleteWechatConfigByIds(Convert.toStrArray(ids));
+        return wechatConfigMapper.deleteBatchIds(Arrays.asList(ids));
     }
 
     /**
@@ -89,6 +108,6 @@ public class WechatConfigServiceImpl implements IWechatConfigService {
      */
     @Override
     public int deleteWechatConfigById(Long id) {
-        return wechatConfigMapper.deleteWechatConfigById(id);
+        return wechatConfigMapper.deleteById(id);
     }
 }

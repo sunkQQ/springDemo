@@ -1,5 +1,7 @@
 package com.sunk.demo.wechat.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.sunk.demo.common.annotation.Excel;
@@ -11,10 +13,12 @@ import com.sunk.demo.common.core.domain.BaseEntity;
  * @author sunk
  * @date 2020-12-03
  */
+@TableName(value = "wechat_config")
 public class WechatConfig extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
+    @TableField
     private Long id;
 
     /** 微信AppId */
