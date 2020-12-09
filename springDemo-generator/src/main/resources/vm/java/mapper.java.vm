@@ -15,4 +15,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper; ${packageName}.domain.${
  */
 public interface ${ClassName}Mapper extends BaseMapper<${ClassName}> {
 
+    /**
+     * 批量新增${subTable.functionName}
+     *
+     * @param ${subclassName}List ${subTable.functionName}列表
+     * @return 结果
+     */
+    public int batch${subClassName}(List<${subClassName}> ${subclassName}List);
 }
