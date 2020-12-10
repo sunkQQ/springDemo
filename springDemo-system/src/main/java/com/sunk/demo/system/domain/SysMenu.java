@@ -1,12 +1,11 @@
 package com.sunk.demo.system.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.sunk.demo.common.core.domain.BaseEntity;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.sunk.demo.common.core.domain.BaseEntity;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 菜单权限表 sys_menu
@@ -49,6 +48,9 @@ public class SysMenu extends BaseEntity {
 
     /** 菜单图标 */
     private String icon;
+
+    /** 备注 */
+    private String remark;
 
     /** 子菜单 */
     private List<SysMenu> children = new ArrayList<SysMenu>();
@@ -156,4 +158,11 @@ public class SysMenu extends BaseEntity {
         this.children = children;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

@@ -49,8 +49,6 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 	 */
 	@Override
 	public SysConfig selectConfigById(Long configId) {
-		SysConfig config = new SysConfig();
-		config.setConfigId(configId);
 		return sysConfigMapper.selectById(configId);
 	}
 

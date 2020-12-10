@@ -21,7 +21,7 @@ public class DruidController extends BaseController {
 
 	@RequiresPermissions("monitor:data:view")
 	@GetMapping()
-	private String index() {
+	public String index() {
 		return redirect(prefix + "/index");
 	}
 }

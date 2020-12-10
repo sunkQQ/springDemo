@@ -1,15 +1,13 @@
 package com.sunk.demo.generator.domain;
 
-import java.util.List;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.sunk.demo.common.constant.GenConstants;
 import com.sunk.demo.common.core.domain.BaseEntity;
 import com.sunk.demo.common.utils.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 /**
  * 业务表 gen_table
@@ -87,6 +85,9 @@ public class GenTable extends BaseEntity {
 
 	/** 树名称字段 */
 	private String treeName;
+
+	/** 备注 */
+	private String remark;
 
 	public Long getTableId() {
 		return tableId;
@@ -266,6 +267,14 @@ public class GenTable extends BaseEntity {
 
 	public boolean isSuperColumn(String javaField) {
 		return isSuperColumn(this.tplCategory, javaField);
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public static boolean isSuperColumn(String tplCategory, String javaField) {

@@ -5,6 +5,7 @@ import com.sunk.demo.framework.mybatisplus.CommonMetaObjectHandler;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @MapperScan("com.sunk.demo.**.mapper")
 @EnableTransactionManagement
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class MybatisPlusConfig {
 
     @Bean

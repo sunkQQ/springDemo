@@ -1,11 +1,11 @@
 package com.sunk.demo.system.domain;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import com.sunk.demo.common.annotation.Excel;
 import com.sunk.demo.common.annotation.Excel.ColumnType;
 import com.sunk.demo.common.core.domain.BaseEntity;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  * 角色表 sys_role
@@ -45,6 +45,9 @@ public class SysRole extends BaseEntity {
 
     /** 用户是否存在此角色标识 默认不存在 */
     private boolean flag = false;
+
+    /** 备注 */
+    private String remark;
 
     /** 菜单组 */
     private Long[] menuIds;
@@ -154,4 +157,11 @@ public class SysRole extends BaseEntity {
         this.deptIds = deptIds;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

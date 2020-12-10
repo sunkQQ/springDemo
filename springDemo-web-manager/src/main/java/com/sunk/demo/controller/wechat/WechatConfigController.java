@@ -121,4 +121,12 @@ public class WechatConfigController extends BaseController {
     {
         return toAjax(wechatConfigService.deleteWechatConfigByIds(ids));
     }
+
+    @GetMapping("/menu/{id}")
+    public String setMenu(@PathVariable("id") Long id, ModelMap mmap){
+        WechatConfig wechatConfig = wechatConfigService.selectWechatConfigById(id);
+        mmap.put("wechatConfig", wechatConfig);
+        return prefix + "/menu";
+    }
+
 }

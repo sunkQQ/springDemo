@@ -1,6 +1,7 @@
 package com.sunk.demo.system.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.sunk.demo.common.annotation.Excel;
 import com.sunk.demo.common.annotation.Excel.ColumnType;
@@ -22,6 +23,7 @@ public class SysConfig extends BaseEntity {
 
     /** 参数主键 */
     @TableField
+    @TableId("config_id")
     @Excel(name = "参数主键", cellType = ColumnType.NUMERIC)
     private Long configId;
 
@@ -40,5 +42,8 @@ public class SysConfig extends BaseEntity {
     /** 系统内置（Y是 N否） */
     @Excel(name = "系统内置", readConverterExp = "Y=是,N=否")
     private String configType;
+
+    /** 备注 */
+    private String remark;
 
 }

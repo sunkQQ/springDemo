@@ -2,7 +2,6 @@ package com.sunk.demo.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sunk.demo.system.domain.SysConfig;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 参数配置 数据层
@@ -10,7 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author sunk
  * @date 2020年10月22日
  */
-@Mapper
 public interface SysConfigMapper extends BaseMapper<SysConfig> {
    /* *//**
      * 查询参数配置信息
