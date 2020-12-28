@@ -1,10 +1,13 @@
 package com.sunk.demo.controller.wechat;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.sunk.demo.common.annotation.Log;
 import com.sunk.demo.common.core.controller.BaseController;
 import com.sunk.demo.common.core.domain.AjaxResult;
 import com.sunk.demo.common.core.page.TableDataInfo;
 import com.sunk.demo.common.enums.BusinessType;
+import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.common.utils.poi.ExcelUtil;
 import com.sunk.demo.wechat.domain.WechatConfig;
 import com.sunk.demo.wechat.service.IWechatConfigService;
@@ -19,7 +22,7 @@ import java.util.List;
 
 /**
  * 公众号设置Controller
- * 
+ *
  * @author sunk
  * @date 2020-12-03
  */
@@ -33,8 +36,7 @@ public class WechatConfigController extends BaseController {
 
     @RequiresPermissions("wechat:config:view")
     @GetMapping()
-    public String config()
-    {
+    public String config() {
         return prefix + "/config";
     }
 
@@ -67,8 +69,7 @@ public class WechatConfigController extends BaseController {
      * 新增公众号设置
      */
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -115,18 +116,50 @@ public class WechatConfigController extends BaseController {
      */
     @RequiresPermissions("wechat:config:remove")
     @Log(title = "公众号设置", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
+    @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
+    public AjaxResult remove(String ids) {
         return toAjax(wechatConfigService.deleteWechatConfigByIds(ids));
     }
 
     @GetMapping("/menu/{id}")
-    public String setMenu(@PathVariable("id") Long id, ModelMap mmap){
+    public String setMenu(@PathVariable("id") Long id, ModelMap mmap) {
         WechatConfig wechatConfig = wechatConfigService.selectWechatConfigById(id);
-        mmap.put("wechatConfig", wechatConfig);
+
+//        String button = "{\"menu\":{\"button\":[{\"name\":\"百度\",\"sub_button\":[],\"type\":\"view\",\"url\":\"http://www.baidu.com\"},{\"name\":\"菜单\",\"sub_button\":[{\"name\":\"菜单\",\"key\":\"col_1\",\"type\":\"click\"}]}]}}";
+        JSONObject jsonObject = new JSONObject();
+        if (wechatConfig != null && StringUtils.isBlank(wechatConfig.getMenus())) {
+            JSONObject json = new JSONObject();
+            json.put("button", new JSONArray());
+            jsonObject.put("menu", json);
+        } else {
+            jsonObject = JSONObject.parseObject(wechatConfig.getMenus());
+        }
+        mmap.put("config", wechatConfig);
+        mmap.put("button", jsonObject);
         return prefix + "/menu";
     }
 
+    //    @RequiresPermissions("wechat:config:edit")
+    @Log(title = "公众号菜单设置", businessType = BusinessType.UPDATE)
+    @PostMapping("/saveButton")
+    @ResponseBody
+    public AjaxResult saveButton(Long id, String menu) {
+        System.out.println(menu);
+        System.out.println(id);
+        WechatConfig wechatConfig = wechatConfigService.selectWechatConfigById(id);
+        if (wechatConfig == null) {
+            return error("配置信息不存在");
+        }
+        wechatConfig.setMenus(menu);
+        return toAjax(wechatConfigService.updateWechatConfig(wechatConfig));
+    }
+
+    @Log(title = "生成菜单", businessType = BusinessType.INTERFACE)
+    @PostMapping("/generateMenu")
+    @ResponseBody
+    public AjaxResult generateMenu(Long id){
+        wechatConfigService.createMenu(id);
+        return toAjax(true);
+    }
 }

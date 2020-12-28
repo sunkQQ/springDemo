@@ -1,8 +1,11 @@
 package com.sunk.demo.wechat.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sunk.demo.api.wechat.WechatMenuClientApi;
 import com.sunk.demo.common.enums.TableNameEnum;
+import com.sunk.demo.common.exception.BusinessException;
 import com.sunk.demo.common.utils.DateUtils;
 import com.sunk.demo.common.utils.GenerateNoUtil;
 import com.sunk.demo.common.utils.StringUtils;
@@ -26,6 +29,9 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
 
     @Autowired
     private WechatConfigMapper wechatConfigMapper;
+
+    @Autowired
+    private WechatMenuClientApi wechatMenuClientApi;
 
     /**
      * 查询公众号设置
@@ -97,7 +103,7 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
      */
     @Override
     public int deleteWechatConfigByIds(String ids) {
-        return wechatConfigMapper.deleteBatchIds(Arrays.asList(ids));
+        return wechatConfigMapper.deleteBatchIds(Arrays.asList(ids.split(",")));
     }
 
     /**
@@ -109,5 +115,15 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
     @Override
     public int deleteWechatConfigById(Long id) {
         return wechatConfigMapper.deleteById(id);
+    }
+
+    @Override
+    public void createMenu(Long id) {
+        WechatConfig wechatConfig = selectWechatConfigById(id);
+        if (wechatConfig == null){
+            throw new BusinessException("配置不存在");
+        }
+        JSONObject jsonObject = JSONObject.parseObject(wechatConfig.getMenus());
+        wechatMenuClientApi.createMenu(wechatConfig.getAppId(), wechatConfig.getAppSecret(), jsonObject.getString("menu"));
     }
 }

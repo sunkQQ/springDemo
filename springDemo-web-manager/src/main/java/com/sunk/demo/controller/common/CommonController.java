@@ -1,8 +1,12 @@
 package com.sunk.demo.controller.common;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.sunk.demo.common.config.Global;
+import com.sunk.demo.common.config.ServerConfig;
+import com.sunk.demo.common.constant.Constants;
+import com.sunk.demo.common.core.domain.AjaxResult;
+import com.sunk.demo.common.utils.StringUtils;
+import com.sunk.demo.common.utils.file.FileUploadUtils;
+import com.sunk.demo.common.utils.file.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sunk.demo.common.config.Global;
-import com.sunk.demo.common.config.ServerConfig;
-import com.sunk.demo.common.constant.Constants;
-import com.sunk.demo.common.core.domain.AjaxResult;
-import com.sunk.demo.common.utils.StringUtils;
-import com.sunk.demo.common.utils.file.FileUploadUtils;
-import com.sunk.demo.common.utils.file.FileUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 通用请求处理
@@ -68,7 +67,7 @@ public class CommonController {
 	 */
 	@PostMapping("/common/upload")
 	@ResponseBody
-	public AjaxResult uploadFile(MultipartFile file) throws Exception {
+	public AjaxResult uploadFile(MultipartFile file) {
 		try {
 			// 上传文件路径
 			String filePath = Global.getUploadPath();

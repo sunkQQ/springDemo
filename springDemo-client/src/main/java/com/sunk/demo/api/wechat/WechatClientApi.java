@@ -16,23 +16,26 @@ import com.sunk.demo.model.wechat.param.AccessTokenModel;
 public class WechatClientApi {
 
 
-    /** 获取基础access_token的接口地址（GET） 限200（次/天） */
-    private final static String ACCESS_TOKEN_URL       = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=SECRET";
-
+    /**
+     * 获取基础access_token的接口地址（GET） 限200（次/天）
+     */
+    private final static String ACCESS_TOKEN_URL = "https://api.weixin.qq.com/cgi-bin/token";
+    private final static String ACCESS_TOKEN_PARAM = "grant_type=client_credential&appid=APPID&secret=SECRET";
 
     /**
      * 获取基础access_token,次数有限，两小时有效
+     *
      * @param appid
      * @param secret
      * @return access_token
      */
     public static String getAccessToken(String appid, String secret) {
         String accessToken = RedisUtil.getStr(appid);
-        if (StringUtils.isBlank(accessToken)){
-            String requestUrl = ACCESS_TOKEN_URL.replace("APPID", appid).replace("SECRET", secret);
-            String result = HttpUtils.sendGet(requestUrl, null);
+        if (StringUtils.isBlank(accessToken)) {
+            String param = ACCESS_TOKEN_PARAM.replace("APPID", appid).replace("SECRET", secret);
+            String result = HttpUtils.sendGet(ACCESS_TOKEN_URL, param);
             JSONObject jsonObject = JSONObject.parseObject(result);
-            if (null != jsonObject && !jsonObject.containsKey("errcode")) {
+            if (jsonObject != null && !jsonObject.containsKey("errcode")) {
                 AccessTokenModel accessTokenModel = JSON.parseObject(jsonObject.toString(), AccessTokenModel.class);
                 RedisUtil.set(appid, accessTokenModel.getAccess_token(), Integer.parseInt(accessTokenModel.getExpires_in()));
                 accessToken = accessTokenModel.getAccess_token();

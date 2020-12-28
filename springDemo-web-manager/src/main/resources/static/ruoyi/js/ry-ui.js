@@ -1038,6 +1038,22 @@ var table = {
             	    $.modal.open("修改" + table.options.modalName, $.operate.editUrl(id));
             	}
             },
+			// 修改规格属性信息
+			editSpec: function(id,type_id) {
+				if($.common.isEmpty(id) && table.options.type == table_type.bootstrapTreeTable) {
+					var row = $.bttTable.bootstrapTreeTable('getSelections')[0];
+					if ($.common.isEmpty(row)) {
+						$.modal.alertWarning("请至少选择一条记录");
+						return;
+					}
+					var url = table.options.updateSpecUrl.replace("{id}", row[table.options.uniqueId]);
+					$.modal.open("规格属性" + table.options.modalName, url);
+				} else {
+					url = table.options.updateSpecUrl.replace("{id}", id);
+					url = url.replace("{type_id}", type_id);
+					$.modal.openFull("规格属性" + table.options.modalName, url);
+				}
+			},
             // 修改信息，以tab页展现
             editTab: function(id) {
             	table.set();

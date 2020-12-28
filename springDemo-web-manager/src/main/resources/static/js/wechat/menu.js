@@ -1,44 +1,7 @@
 ;$(function(){
 	var mId=null;
 	//显示自定义按钮组
-	var obj={
-		    "menu": {
-		        "button": [
-		            {
-		                "type": "click", 
-		                "name": "今日歌曲", 
-		                "key": "col_2", 
-		                "sub_button": [ ]
-		            }, 
-		            {
-		                "type": "view", 
-		                "name": "百度一下", 
-		                "url": "http://www.baidu.com/",
-		                "sub_button": [ ]
-		            }, 
-		            {
-		                "name": "菜单", 
-		                "sub_button": [
-		                    {
-		                        "type": "view", 
-		                        "name": "搜索", 
-		                        "url": "http://www.soso.com/"
-		                    }, 
-		                    {
-		                        "type": "view", 
-		                        "name": "视频", 
-		                        "url": "http://v.qq.com/"
-		                    }, 
-		                    {
-		                        "type": "click", 
-		                        "name": "赞一下我们", 
-		                        "key": "col_1"
-		                    }
-		                ]
-		            }
-		        ]
-		    }
-		};
+
 	var tempObj={};//存储HTML对象
 	var button=obj.menu.button;//一级菜单
 	//显示异常
@@ -311,6 +274,8 @@
 				var current=$('.subbutton__actived');
 				var alt=current.attr('alt');
 				var lis=current.find('ul>li');
+				console.log(button[buttonIndex]);
+				console.log(button);
 				setInput(button[buttonIndex].name);
 				updateTit(button[buttonIndex].name);
 				if(lis.length>1){
@@ -654,6 +619,27 @@
 		$('input[name="url"]').val('');
 		$('.msg-template').children().remove();
 		$('.msg-context__item').show();
+		ix --;
+		button.pop();
+		if (ix == 0){
+			$('.custom-menu-view__menu').css({
+				width:'100%'
+			});
+			// $('.custom-menu-view__menu')[ix-1].setAttribute('alt',ix-1);
+		} else if(ix==1){
+			$('.custom-menu-view__menu').css({
+				width:'50%'
+			});
+			$('.custom-menu-view__menu')[ix-1].setAttribute('alt',ix-1);
+		} else if(ix==2){
+			$('.custom-menu-view__menu').css({
+				width:'33.3333%'
+			});
+			$('.custom-menu-view__menu')[ix-1].setAttribute('alt',ix-1);
+			/*var i_el='<div class="custom-menu-view__menu" style="width: 33.3333%;"><div class="text-ellipsis"><i class="glyphicon glyphicon-plus text-info iBtn"></i></div></div>';
+			$('.custom-menu-view__footer__right').append(i_el);*/
+		}
+		
 	})
 	//保存自定义菜单
 	$('#saveBtns').click(function(){
@@ -709,9 +695,10 @@
 	function saveAjax(){
 		$.ajax({
     		type: "POST",
-			url: "<%=path%>/menu/saveButton.html",
+			url: "/wechat/config/saveButton",
 			data : {
 				"menu" :JSON.stringify(obj) ,//先将对象转换为字符串再传给后台
+				"id": $("#id").val()
 			},
 			dataType : "json",
 			success : function(data) {

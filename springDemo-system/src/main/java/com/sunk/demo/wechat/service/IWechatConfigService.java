@@ -59,4 +59,10 @@ public interface IWechatConfigService extends IService<WechatConfig> {
      * @return 结果
      */
     public int deleteWechatConfigById(Long id);
+
+    /**
+     * 创建微信菜单
+     * @param id
+     */
+    public void createMenu(Long id);
 }

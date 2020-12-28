@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include :: header('新增公众号设置')" />
+    <th:block th:include="include :: header('新增公众号设置')"/>
     <!-- 自定义样式 -->
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
     <link rel="stylesheet" th:href="@{/css/wechat/wx-custom.css}">
@@ -9,6 +9,7 @@
 <body class="white-bg">
 
 <div class="container">
+    <input id="id" name="id" type="hidden" th:value="${config.id}">
     <!-- 自定义菜单 -->
     <h3>自定义菜单</h3>
     <div class="custom-menu-edit-con">
@@ -18,31 +19,42 @@
                     <div class="custom-menu-view">
                         <div class="custom-menu-view__title">公众号名称</div>
                         <div class="custom-menu-view__body">
-                            <div class="weixin-msg-list"><ul class="msg-con"></ul></div>
+                            <div class="weixin-msg-list">
+                                <ul class="msg-con"></ul>
+                            </div>
                         </div>
                         <div id="menuMain" class="custom-menu-view__footer">
                             <div class="custom-menu-view__footer__left"></div>
-                            <div class="custom-menu-view__footer__right" ></div>
+                            <div class="custom-menu-view__footer__right"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="inner-right">
                 <div class="cm-edit-after">
-                    <div class="cm-edit-right-header b-b"><span id="cm-tit"></span> <a id="delMenu" class="pull-right" href="javascript:;">删除菜单</a></div>
+                    <div class="cm-edit-right-header b-b"><span id="cm-tit"></span> <a id="delMenu" class="pull-right"
+                                                                                       href="javascript:;">删除菜单</a>
+                    </div>
                     <form class="form-horizontal wrapper-md" name="custom_form">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">菜单名称:</label><div class="col-sm-5">
-                            <input name="custom_input_title" type="text" class="form-control" ng-model="menuname" value="" placeholder="" ng-maxlength="5"></div><div class="col-sm-5 help-block">
-                            <div ng-show="custom_form.custom_input_title.$dirty&&custom_form.custom_input_title.$invalid-maxlength">字数不超过5个汉字或16个字符</div>
-                            <div class="font_sml" style="display: none;">若无二级菜单，可输入20个汉字或60个字符</div>
-                        </div>
+                            <label class="col-sm-2 control-label">菜单名称:</label>
+                            <div class="col-sm-5">
+                                <input name="custom_input_title" type="text" class="form-control" ng-model="menuname"
+                                       value="" placeholder="" ng-maxlength="5"></div>
+                            <div class="col-sm-5 help-block">
+                                <div ng-show="custom_form.custom_input_title.$dirty&&custom_form.custom_input_title.$invalid-maxlength">
+                                    字数不超过5个汉字或16个字符
+                                </div>
+                                <div class="font_sml" style="display: none;">若无二级菜单，可输入20个汉字或60个字符</div>
+                            </div>
                         </div>
                         <div class="form-group" id="radioGroup">
                             <label class="col-sm-2 control-label">菜单内容:</label>
                             <div class="col-sm-10 LebelRadio">
-                                <label class="checkbox-inline"><input type="radio" name="radioBtn" value="sendmsg" checked> 发送消息</label>
-                                <label class="checkbox-inline"><input type="radio" name="radioBtn" value="link"> 跳转网页</label>
+                                <label class="checkbox-inline"><input type="radio" name="radioBtn" value="sendmsg"
+                                                                      checked> 发送消息</label>
+                                <label class="checkbox-inline"><input type="radio" name="radioBtn" value="link">
+                                    跳转网页</label>
                             </div>
                         </div>
                     </form>
@@ -60,7 +72,9 @@
                             <div class="editTab-body">
                                 <div class="msg-panel__context">
                                     <div class="msg-context__item">
-                                        <div class="msg-panel__center msg-panel_select"  data-toggle="modal" data-target="#selectModal"><span class="message-plus">+</span><br>从素材库中选择</div>
+                                        <div class="msg-panel__center msg-panel_select" data-toggle="modal"
+                                             data-target="#selectModal"><span class="message-plus">+</span><br>从素材库中选择
+                                        </div>
                                     </div>
                                     <div class="msg-template"></div>
                                 </div>
@@ -89,13 +103,14 @@
         </div>
     </div>
     <div class="cm-edit-footer">
-        <button id="sortBtn" type="button" class="btn btn-default">菜单排序</button>
-        <button id="sortBtnc" type="button" class="btn btn-default">完成排序</button>
+        <!--<button id="sortBtn" type="button" class="btn btn-default">菜单排序</button>
+        <button id="sortBtnc" type="button" class="btn btn-default">完成排序</button>-->
+        <!--<button id="generateMenu" type="button" class="btn btn-default">生成菜单</button>-->
         <button id="saveBtns" type="button" class="btn btn-info1">保存</button>
     </div>
 </div>
-<th:block th:include="include :: footer" />
-<th:block th:include="include :: wechat-js" />
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: wechat-js"/>
 <div id="selectModal" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -114,10 +129,14 @@
                             </div>
                             <div class="panel-body">
                                 <h5 class="msg-title">微信缴费使用指南1</h5>
-                                <div class="msg-img"><img src="assets/images/20170831595cf16beb634972a65adb6b14abca9b.jpg" alt=""></div>
+                                <div class="msg-img"><img
+                                        src="/profile/upload/2020/12/15/20170831595cf16beb634972a65adb6b14abca9b.jpg"
+                                        alt=""></div>
                                 <p class="msg-text">微信缴费使用指南</p>
                             </div>
-                            <div class="mask-bg"><div class="mask-icon"><i class="icon-ok"></i></div></div>
+                            <div class="mask-bg">
+                                <div class="mask-icon"><i class="icon-ok"></i></div>
+                            </div>
                         </div>
                     </div>
                     <div id="col_2" class="col-xs-4">
@@ -127,10 +146,12 @@
                             </div>
                             <div class="panel-body">
                                 <h5 class="msg-title">微信缴费使用指南2</h5>
-                                <div class="msg-img"><img src="assets/images/1.png" alt=""></div>
+                                <div class="msg-img"><img src="/profile/upload/2020/12/15/1.png" alt=""></div>
                                 <p class="msg-text">微信缴费使用指南</p>
                             </div>
-                            <div class="mask-bg"><div class="mask-icon"><i class="icon-ok"></i></div></div>
+                            <div class="mask-bg">
+                                <div class="mask-icon"><i class="icon-ok"></i></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -181,5 +202,10 @@
         </div>
     </div>
 </div>
+<script>
+    var prefix = ctx + "wechat/config";
+    var obj = JSON.parse('[[${button}]]'.replace(/&quot;/g, "\""));
+
+</script>
 </body>
 </html>
