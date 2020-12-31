@@ -1,16 +1,15 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.shop.domain.StoreOrder;
 import com.sunk.demo.shop.domain.StoreOrderGoods;
 import com.sunk.demo.shop.mapper.StoreOrderMapper;
 import com.sunk.demo.shop.service.StoreOrderGoodsService;
 import com.sunk.demo.shop.service.StoreOrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 订单主Service业务层处理
@@ -95,6 +94,7 @@ public class StoreOrderServiceImpl implements StoreOrderService {
 	 * @param orderId 订单主ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreOrderById(Integer orderId) {
 		return storeOrderMapper.deleteStoreOrderById(orderId);
 	}

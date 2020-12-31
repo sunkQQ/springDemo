@@ -1,14 +1,13 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.shop.domain.StoreGoodsBrand;
 import com.sunk.demo.shop.mapper.StoreGoodsBrandMapper;
 import com.sunk.demo.shop.service.StoreGoodsBrandService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 产品品牌Service业务层处理
@@ -83,6 +82,7 @@ public class StoreGoodsBrandServiceImpl implements StoreGoodsBrandService {
 	 * @param id 产品品牌ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreGoodsBrandById(Long id) {
 		return storeGoodsBrandMapper.deleteStoreGoodsBrandById(id);
 	}

@@ -9,14 +9,21 @@ package com.sunk.demo.common.enums;
  */
 
 public enum OrderStatus {
-
+	/** -1、已取消 */
 	CANCEL(-1,"已取消"),
+	/** 0、待付款 */
     UNPAY(0,"待付款"),
+	/** 1、已付款 */
     PAYED(1,"已付款"),
+	/** 2、已发货 */
     SENDED(2,"已发货"),
+	/** 3、退货中 */
     RETURNING(3,"退货中"),
+	/** 4、退货完成 */
     RETURNED(4,"退货完成"),
+	/** 5、待评价 */
     UNCOMMENT(5,"待评价"),
+	/** 已评价 */
     COMMENTED(6,"已评价");
 
 	private int code;

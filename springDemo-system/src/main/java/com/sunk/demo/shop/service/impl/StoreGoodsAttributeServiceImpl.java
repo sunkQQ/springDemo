@@ -1,15 +1,14 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.shop.domain.StoreGoodsAttribute;
 import com.sunk.demo.shop.mapper.StoreGoodsAttributeMapper;
 import com.sunk.demo.shop.service.StoreGoodsAttributeService;
 import com.sunk.demo.shop.service.StoreGoodsTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 商品的属性(独立)Service业务层处理
@@ -92,6 +91,7 @@ public class StoreGoodsAttributeServiceImpl implements StoreGoodsAttributeServic
 	 * @param attrId 商品的属性(独立)ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreGoodsAttributeById(Long attrId) {
 		return storeGoodsAttributeMapper.deleteStoreGoodsAttributeById(attrId);
 	}

@@ -1,34 +1,5 @@
 package com.sunk.demo.controller.shop;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sunk.demo.common.annotation.Log;
@@ -38,23 +9,21 @@ import com.sunk.demo.common.core.page.TableDataInfo;
 import com.sunk.demo.common.enums.BusinessType;
 import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.common.utils.poi.ExcelUtil;
-import com.sunk.demo.shop.domain.StoreGoods;
-import com.sunk.demo.shop.domain.StoreGoodsAttr;
-import com.sunk.demo.shop.domain.StoreGoodsAttribute;
-import com.sunk.demo.shop.domain.StoreGoodsCate;
-import com.sunk.demo.shop.domain.StoreGoodsType;
-import com.sunk.demo.shop.domain.StoreSpec;
-import com.sunk.demo.shop.domain.StoreSpecGoodsPrice;
-import com.sunk.demo.shop.domain.StoreSpecItem;
-import com.sunk.demo.shop.service.StoreGoodsAttrService;
-import com.sunk.demo.shop.service.StoreGoodsAttributeService;
-import com.sunk.demo.shop.service.StoreGoodsCateService;
-import com.sunk.demo.shop.service.StoreGoodsService;
-import com.sunk.demo.shop.service.StoreGoodsTypeService;
-import com.sunk.demo.shop.service.StoreSpecGoodsPriceService;
-import com.sunk.demo.shop.service.StoreSpecItemService;
-import com.sunk.demo.shop.service.StoreSpecService;
+import com.sunk.demo.shop.domain.*;
+import com.sunk.demo.shop.service.*;
 import com.sunk.demo.shop.vo.SpecVO;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.text.MessageFormat;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * 商品主Controller
@@ -176,8 +145,9 @@ public class StoreGoodsController extends BaseController {
 			@RequestParam(value = "type_id", defaultValue = "0") Integer typeId) {
 
 		// System.out.println("typeId:"+typeId);
-		if (typeId == 0)
+		if (typeId == 0) {
 			return AjaxResult.success("success", "");
+		}
 		StoreSpec storeSpec = new StoreSpec();
 		storeSpec.setTypeId(typeId.longValue());
 		List<StoreSpec> specs = storeSpecService.selectStoreSpecList(storeSpec);
@@ -221,8 +191,9 @@ public class StoreGoodsController extends BaseController {
 	public AjaxResult ajaxGetAttrInput(@RequestParam(value = "goods_id", defaultValue = "0") Integer goodsId,
 			@RequestParam(value = "type_id", defaultValue = "0") Integer typeId) {
 
-		if (typeId == 0)
+		if (typeId == 0) {
 			return AjaxResult.success("success", "");
+		}
 		StoreGoodsAttribute attribute = new StoreGoodsAttribute();
 		attribute.setTypeId(typeId);
 		List<StoreGoodsAttribute> attributeList = storeGoodsAttributeService.selectStoreGoodsAttributeList(attribute);
@@ -319,8 +290,9 @@ public class StoreGoodsController extends BaseController {
 		for (List<Integer> value : finalMap.values()) {
 			ls.add(value);
 		}
-		if (ls.isEmpty())
+		if (ls.isEmpty()) {
 			return AjaxResult.success("success", "");
+		}
 		List Dlist = StringUtils.Dikaerji0(ls);
 
 

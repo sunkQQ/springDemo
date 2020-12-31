@@ -1,14 +1,13 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.shop.domain.StoreSpecGoodsPrice;
 import com.sunk.demo.shop.mapper.StoreSpecGoodsPriceMapper;
 import com.sunk.demo.shop.service.StoreSpecGoodsPriceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 商品规格关联价格Service业务层处理
@@ -83,6 +82,7 @@ public class StoreSpecGoodsPriceServiceImpl implements StoreSpecGoodsPriceServic
 	 * @param itemId 商品规格关联价格ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreSpecGoodsPriceById(Long itemId) {
 		return storeSpecGoodsPriceMapper.deleteStoreSpecGoodsPriceById(itemId);
 	}

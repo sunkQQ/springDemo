@@ -1,12 +1,5 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.shop.domain.StoreGoods;
 import com.sunk.demo.shop.domain.StoreGoodsAttr;
@@ -17,6 +10,12 @@ import com.sunk.demo.shop.mapper.StoreSpecGoodsPriceMapper;
 import com.sunk.demo.shop.service.StoreGoodsAttrService;
 import com.sunk.demo.shop.service.StoreGoodsService;
 import com.sunk.demo.shop.service.StoreSpecGoodsPriceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 商品主Service业务层处理
@@ -180,6 +179,7 @@ public class StoreGoodsServiceImpl implements StoreGoodsService {
 	 * @param goodsId 商品主ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreGoodsById(Integer goodsId) {
 		return storeGoodsMapper.deleteStoreGoodsById(goodsId);
 	}

@@ -28,6 +28,7 @@ public class TaskException extends Exception {
 	}
 
 	public enum Code {
+		/**  */
 		TASK_EXISTS,
 		NO_TASK_EXISTS,
 		TASK_ALREADY_STARTED,

@@ -1,15 +1,11 @@
 package com.sunk.demo.framework.shiro.web.filter.kickout;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayDeque;
-import java.util.Deque;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sunk.demo.common.constant.ShiroConstants;
+import com.sunk.demo.common.core.domain.AjaxResult;
+import com.sunk.demo.common.utils.ServletUtils;
+import com.sunk.demo.framework.util.ShiroUtils;
+import com.sunk.demo.system.domain.SysUser;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.session.Session;
@@ -19,12 +15,14 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sunk.demo.common.constant.ShiroConstants;
-import com.sunk.demo.common.core.domain.AjaxResult;
-import com.sunk.demo.common.utils.ServletUtils;
-import com.sunk.demo.framework.util.ShiroUtils;
-import com.sunk.demo.system.domain.SysUser;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * 登录帐号控制过滤器
@@ -35,7 +33,7 @@ import com.sunk.demo.system.domain.SysUser;
 
 public class KickoutSessionFilter extends AccessControlFilter {
 
-	private final static ObjectMapper objectMapper = new ObjectMapper();
+	private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
 	/**
 	 * 同一个用户最大会话数
@@ -134,7 +132,7 @@ public class KickoutSessionFilter extends AccessControlFilter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		if (ServletUtils.isAjaxRequest(req)) {
 			AjaxResult ajaxResult = AjaxResult.error("您已在别处登录，请您修改密码或重新登录");
-			ServletUtils.renderString(res, objectMapper.writeValueAsString(ajaxResult));
+			ServletUtils.renderString(res, OBJECT_MAPPER.writeValueAsString(ajaxResult));
 		} else {
 			WebUtils.issueRedirect(request, response, kickoutUrl);
 		}

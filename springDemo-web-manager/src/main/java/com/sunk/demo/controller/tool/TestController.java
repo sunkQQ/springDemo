@@ -1,27 +1,15 @@
 package com.sunk.demo.controller.tool;
 
+import com.sunk.demo.common.core.controller.BaseController;
+import com.sunk.demo.common.core.domain.AjaxResult;
+import com.sunk.demo.common.utils.StringUtils;
+import io.swagger.annotations.*;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.sunk.demo.common.core.controller.BaseController;
-import com.sunk.demo.common.core.domain.AjaxResult;
-import com.sunk.demo.common.utils.StringUtils;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
 
 /**
  * swagger 用户测试方法
@@ -34,16 +22,16 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/test/user")
 public class TestController extends BaseController {
 
-	private final static Map<Integer, UserEntity> users = new LinkedHashMap<Integer, UserEntity>();
+	private final static Map<Integer, UserEntity> USERS = new LinkedHashMap<Integer, UserEntity>();
 	{
-		users.put(1, new UserEntity(1, "admin", "admin123", "15888888888"));
-		users.put(2, new UserEntity(2, "sunk", "admin123", "15666666666"));
+		USERS.put(1, new UserEntity(1, "admin", "admin123", "15888888888"));
+		USERS.put(2, new UserEntity(2, "sunk", "admin123", "15666666666"));
 	}
 
 	@ApiOperation("获取用户列表")
 	@GetMapping("/list")
 	public AjaxResult userList() {
-		List<UserEntity> userList = new ArrayList<UserEntity>(users.values());
+		List<UserEntity> userList = new ArrayList<UserEntity>(USERS.values());
 		return AjaxResult.success(userList);
 	}
 
@@ -51,8 +39,8 @@ public class TestController extends BaseController {
 	@ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
 	@GetMapping("/{userId}")
 	public AjaxResult getUser(@PathVariable Integer userId) {
-		if (!users.isEmpty() && users.containsKey(userId)) {
-			return AjaxResult.success(users.get(userId));
+		if (!USERS.isEmpty() && USERS.containsKey(userId)) {
+			return AjaxResult.success(USERS.get(userId));
 		} else {
 			return error("用户不存在");
 		}
@@ -65,7 +53,7 @@ public class TestController extends BaseController {
 		if (StringUtils.isNull(user) || StringUtils.isNull(user.getUserId())) {
 			return error("用户ID不能为空");
 		}
-		return AjaxResult.success(users.put(user.getUserId(), user));
+		return AjaxResult.success(USERS.put(user.getUserId(), user));
 	}
 
 	@ApiOperation("更新用户")
@@ -75,19 +63,19 @@ public class TestController extends BaseController {
 		if (StringUtils.isNull(user) || StringUtils.isNull(user.getUserId())) {
 			return error("用户ID不能为空");
 		}
-		if (users.isEmpty() || !users.containsKey(user.getUserId())) {
+		if (USERS.isEmpty() || !USERS.containsKey(user.getUserId())) {
 			return error("用户不存在");
 		}
-		users.remove(user.getUserId());
-		return AjaxResult.success(users.put(user.getUserId(), user));
+		USERS.remove(user.getUserId());
+		return AjaxResult.success(USERS.put(user.getUserId(), user));
 	}
 
 	@ApiOperation("删除用户信息")
 	@ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "int", paramType = "path")
 	@DeleteMapping("/{userId}")
 	public AjaxResult delete(@PathVariable Integer userId) {
-		if (!users.isEmpty() && users.containsKey(userId)) {
-			users.remove(userId);
+		if (!USERS.isEmpty() && USERS.containsKey(userId)) {
+			USERS.remove(userId);
 			return success();
 		} else {
 			return error("用户不存在");

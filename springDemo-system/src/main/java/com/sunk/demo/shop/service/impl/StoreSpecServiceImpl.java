@@ -1,13 +1,5 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.shop.domain.StoreSpec;
@@ -15,6 +7,13 @@ import com.sunk.demo.shop.domain.StoreSpecItem;
 import com.sunk.demo.shop.mapper.StoreSpecItemMapper;
 import com.sunk.demo.shop.mapper.StoreSpecMapper;
 import com.sunk.demo.shop.service.StoreSpecService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 商品规格(独立)Service业务层处理
@@ -142,6 +141,7 @@ public class StoreSpecServiceImpl implements StoreSpecService {
 	 * @param id 商品规格(独立)ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreSpecById(Long id) {
 		return storeSpecMapper.deleteStoreSpecById(id);
 	}

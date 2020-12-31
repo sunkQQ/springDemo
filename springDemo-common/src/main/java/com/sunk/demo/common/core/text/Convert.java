@@ -7,8 +7,6 @@ import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.text.NumberFormat;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -814,8 +812,8 @@ public class Convert {
 	 * @param input
 	 * @return
 	 */
-	public static String toSBC(String input) {
-		return toSBC(input, null);
+	public static String tosbc(String input) {
+		return tosbc(input, null);
 	}
 
 	/**
@@ -825,7 +823,7 @@ public class Convert {
 	 * @param notConvertSet 不替换的字符集合
 	 * @return
 	 */
-	public static String toSBC(String input, Set<Character> notConvertSet) {
+	public static String tosbc(String input, Set<Character> notConvertSet) {
 		char c[] = input.toCharArray();
 		for (int i = 0; i < c.length; i++) {
 			if (null != notConvertSet && notConvertSet.contains(c[i])) {
@@ -849,8 +847,8 @@ public class Convert {
 	 * @param input
 	 * @return
 	 */
-	public static String toDBC(String input) {
-		return toDBC(input, null);
+	public static String todbc(String input) {
+		return todbc(input, null);
 	}
 
 	/**
@@ -860,7 +858,7 @@ public class Convert {
 	 * @param notConvertSet 不替换的字符集合
 	 * @return
 	 */
-	public static String toDBC(String text, Set<Character> notConvertSet) {
+	public static String todbc(String text, Set<Character> notConvertSet) {
 		char c[] = text.toCharArray();
 		for (int i = 0; i < c.length; i++) {
 			if (null != notConvertSet && notConvertSet.contains(c[i])) {

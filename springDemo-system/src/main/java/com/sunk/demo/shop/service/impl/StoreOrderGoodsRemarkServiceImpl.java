@@ -1,14 +1,13 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.shop.domain.StoreOrderGoodsRemark;
 import com.sunk.demo.shop.mapper.StoreOrderGoodsRemarkMapper;
 import com.sunk.demo.shop.service.StoreOrderGoodsRemarkService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 订单商品备注Service业务层处理
@@ -83,6 +82,7 @@ public class StoreOrderGoodsRemarkServiceImpl implements StoreOrderGoodsRemarkSe
 	 * @param id 订单商品备注ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreOrderGoodsRemarkById(Integer id) {
 		return storeOrderGoodsRemarkMapper.deleteStoreOrderGoodsRemarkById(id);
 	}

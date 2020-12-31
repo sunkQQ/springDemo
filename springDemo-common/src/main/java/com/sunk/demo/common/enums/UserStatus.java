@@ -9,9 +9,11 @@ package com.sunk.demo.common.enums;
  */
 
 public enum UserStatus {
-
+	/** 0、正常 */
 	OK("0", "正常"),
+	/** 1、停用 */
 	DISABLE("1", "停用"),
+	/** 2、删除 */
 	DELETED("2", "删除");
 
 	private final String code;

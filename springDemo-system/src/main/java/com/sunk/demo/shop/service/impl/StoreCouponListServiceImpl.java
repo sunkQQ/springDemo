@@ -1,14 +1,13 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.shop.domain.StoreCouponList;
 import com.sunk.demo.shop.mapper.StoreCouponListMapper;
 import com.sunk.demo.shop.service.StoreCouponListService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 优惠券记录Service业务层处理
@@ -83,6 +82,7 @@ public class StoreCouponListServiceImpl implements StoreCouponListService {
 	 * @param id 优惠券记录ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreCouponListById(Integer id) {
 		return storeCouponListMapper.deleteStoreCouponListById(id);
 	}

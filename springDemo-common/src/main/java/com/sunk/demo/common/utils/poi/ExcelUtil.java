@@ -1,46 +1,5 @@
 package com.sunk.demo.common.utils.poi;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.DataValidation;
-import org.apache.poi.ss.usermodel.DataValidationConstraint;
-import org.apache.poi.ss.usermodel.DataValidationHelper;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.ss.util.CellRangeAddressList;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFDataValidation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.sunk.demo.common.annotation.Excel;
 import com.sunk.demo.common.annotation.Excel.ColumnType;
 import com.sunk.demo.common.annotation.Excel.Type;
@@ -53,6 +12,20 @@ import com.sunk.demo.common.utils.DateUtils;
 import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.common.utils.reflect.ReflectUtils;
 import com.sunk.demo.common.utils.spring.SpringUtils;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddressList;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFDataValidation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.*;
 
 /**
  * Excel相关处理
@@ -68,7 +41,7 @@ public class ExcelUtil<T> {
 	/**
 	 * Excel sheet最大行数，默认65536
 	 */
-	public static final int sheetSize = 65536;
+	public static final int SHEET_SIZE = 65536;
 
 	/**
 	 * 工作表名称
@@ -282,7 +255,7 @@ public class ExcelUtil<T> {
 		OutputStream out = null;
 		try {
 			// 取出一共有多少个sheet.
-			double sheetNo = Math.ceil(list.size() / sheetSize);
+			double sheetNo = Math.ceil(list.size() / SHEET_SIZE);
 			for (int index = 0; index <= sheetNo; index++) {
 				createSheet(sheetNo, index);
 
@@ -330,8 +303,8 @@ public class ExcelUtil<T> {
 	 * @param row   单元格行
 	 */
 	public void fillExcelData(int index, Row row) {
-		int startNo = index * sheetSize;
-		int endNo = Math.min(startNo + sheetSize, list.size());
+		int startNo = index * SHEET_SIZE;
+		int endNo = Math.min(startNo + SHEET_SIZE, list.size());
 		for (int i = startNo; i < endNo; i++) {
 			row = sheet.createRow(i + 1 - startNo);
 			// 得到导出对象.

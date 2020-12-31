@@ -1,17 +1,16 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sunk.demo.common.core.domain.Ztree;
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.common.exception.BusinessException;
 import com.sunk.demo.shop.domain.StoreGoodsCate;
 import com.sunk.demo.shop.mapper.StoreGoodsCateMapper;
 import com.sunk.demo.shop.service.StoreGoodsCateService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 商城商品分类Service业务层处理
@@ -86,12 +85,14 @@ public class StoreGoodsCateServiceImpl implements StoreGoodsCateService {
 	 * @param id 商城商品分类ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreGoodsCateById(Long id) {
 		StoreGoodsCate goodsCate = new StoreGoodsCate();
 		goodsCate.setPid(id);
 		List<StoreGoodsCate> goodsCates = storeGoodsCateMapper.selectStoreGoodsCateList(goodsCate);
-		if (!goodsCates.isEmpty())
+		if (!goodsCates.isEmpty()) {
 			throw new BusinessException("请先删除子分类");
+		}
 		return storeGoodsCateMapper.deleteStoreGoodsCateById(id);
 	}
 

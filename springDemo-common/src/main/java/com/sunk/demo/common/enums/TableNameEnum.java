@@ -8,6 +8,7 @@ package com.sunk.demo.common.enums;
  */
 public enum TableNameEnum {
 
+    /** 00、微信设置表 */
     WECHAT_CONFIG("00", "wechat_config"),
     ;
 

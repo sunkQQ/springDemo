@@ -1,14 +1,13 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.shop.domain.StoreGoodsType;
 import com.sunk.demo.shop.mapper.StoreGoodsTypeMapper;
 import com.sunk.demo.shop.service.StoreGoodsTypeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 商品类型(商品模型)Service业务层处理
@@ -83,6 +82,7 @@ public class StoreGoodsTypeServiceImpl implements StoreGoodsTypeService {
 	 * @param id 商品类型(商品模型)ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreGoodsTypeById(Integer id) {
 		return storeGoodsTypeMapper.deleteStoreGoodsTypeById(id);
 	}

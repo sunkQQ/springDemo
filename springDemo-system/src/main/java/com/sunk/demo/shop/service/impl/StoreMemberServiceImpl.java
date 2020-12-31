@@ -1,15 +1,14 @@
 package com.sunk.demo.shop.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.common.utils.DateUtils;
 import com.sunk.demo.shop.domain.StoreMember;
 import com.sunk.demo.shop.mapper.StoreMemberMapper;
 import com.sunk.demo.shop.service.StoreMemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 商城会员信息Service业务层处理
@@ -86,6 +85,7 @@ public class StoreMemberServiceImpl implements StoreMemberService {
 	 * @param id 商城会员信息ID
 	 * @return 结果
 	 */
+	@Override
 	public int deleteStoreMemberById(Long id) {
 		return storeMemberMapper.deleteStoreMemberById(id);
 	}

@@ -89,9 +89,15 @@ public @interface Excel {
 	 */
 	Type type() default Type.ALL;
 
+	/**
+	 * 类型
+	 */
 	public enum Type {
+		/**  */
 		ALL(0),
+		/** 导入 */
 		EXPORT(1),
+		/** 导出 */
 		IMPORT(2);
 
 		private final int value;
@@ -105,8 +111,13 @@ public @interface Excel {
 		}
 	}
 
+	/**
+	 * 字段类型
+	 */
 	public enum ColumnType {
+		/** 数字 */
 		NUMERIC(0),
+		/** 字符串 */
 		STRING(1);
 
 		private final int value;

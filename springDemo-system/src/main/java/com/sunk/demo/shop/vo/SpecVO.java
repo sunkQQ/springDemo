@@ -1,5 +1,7 @@
 package com.sunk.demo.shop.vo;
 
+import lombok.ToString;
+
 import java.util.List;
 
 /**
@@ -8,7 +10,7 @@ import java.util.List;
  * @author sunk
  * @date 2020年10月27日
  */
-
+@ToString
 public class SpecVO {
 
 	private String goodsId;
