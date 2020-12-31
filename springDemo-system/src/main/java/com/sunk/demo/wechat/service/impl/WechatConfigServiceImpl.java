@@ -28,9 +28,6 @@ import java.util.List;
 public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, WechatConfig> implements IWechatConfigService {
 
     @Autowired
-    private WechatConfigMapper wechatConfigMapper;
-
-    @Autowired
     private WechatMenuClientApi wechatMenuClientApi;
 
     /**
@@ -41,7 +38,7 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
      */
     @Override
     public WechatConfig selectWechatConfigById(Long id) {
-        return wechatConfigMapper.selectById(id);
+        return getById(id);
     }
 
     /**
@@ -67,7 +64,7 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
                 wrapper.eq(WechatConfig::getStatus, wechatConfig.getStatus());
             }
         }
-        return wechatConfigMapper.selectList(wrapper);
+        return list(wrapper);
     }
 
     /**
@@ -80,7 +77,7 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
     public int insertWechatConfig(WechatConfig wechatConfig) {
         wechatConfig.setId(GenerateNoUtil.getNextIDValue(TableNameEnum.WECHAT_CONFIG));
         wechatConfig.setCreateTime(DateUtils.getNowDate());
-        return wechatConfigMapper.insert(wechatConfig);
+        return baseMapper.insert(wechatConfig);
     }
 
     /**
@@ -92,7 +89,7 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
     @Override
     public int updateWechatConfig(WechatConfig wechatConfig) {
         wechatConfig.setUpdateTime(DateUtils.getNowDate());
-        return wechatConfigMapper.updateById(wechatConfig);
+        return baseMapper.updateById(wechatConfig);
     }
 
     /**
@@ -103,7 +100,7 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
      */
     @Override
     public int deleteWechatConfigByIds(String ids) {
-        return wechatConfigMapper.deleteBatchIds(Arrays.asList(ids.split(",")));
+        return baseMapper.deleteBatchIds(Arrays.asList(ids.split(",")));
     }
 
     /**
@@ -114,7 +111,7 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
      */
     @Override
     public int deleteWechatConfigById(Long id) {
-        return wechatConfigMapper.deleteById(id);
+        return baseMapper.deleteById(id);
     }
 
     @Override

@@ -140,7 +140,7 @@ public class WechatConfigController extends BaseController {
         return prefix + "/menu";
     }
 
-    //    @RequiresPermissions("wechat:config:edit")
+    @RequiresPermissions("wechat:config:button")
     @Log(title = "公众号菜单设置", businessType = BusinessType.UPDATE)
     @PostMapping("/saveButton")
     @ResponseBody
@@ -155,6 +155,7 @@ public class WechatConfigController extends BaseController {
         return toAjax(wechatConfigService.updateWechatConfig(wechatConfig));
     }
 
+    @RequiresPermissions("wechat:config:menu")
     @Log(title = "生成菜单", businessType = BusinessType.INTERFACE)
     @PostMapping("/generateMenu")
     @ResponseBody
