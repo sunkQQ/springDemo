@@ -29,7 +29,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/wechat/config")
 public class WechatConfigController extends BaseController {
-    private String prefix = "wechat/config";
+    private final String prefix = "wechat/config";
 
     @Autowired
     private IWechatConfigService wechatConfigService;
@@ -125,8 +125,6 @@ public class WechatConfigController extends BaseController {
     @GetMapping("/menu/{id}")
     public String setMenu(@PathVariable("id") Long id, ModelMap mmap) {
         WechatConfig wechatConfig = wechatConfigService.selectWechatConfigById(id);
-
-//        String button = "{\"menu\":{\"button\":[{\"name\":\"百度\",\"sub_button\":[],\"type\":\"view\",\"url\":\"http://www.baidu.com\"},{\"name\":\"菜单\",\"sub_button\":[{\"name\":\"菜单\",\"key\":\"col_1\",\"type\":\"click\"}]}]}}";
         JSONObject jsonObject = new JSONObject();
         if (wechatConfig != null && StringUtils.isBlank(wechatConfig.getMenus())) {
             JSONObject json = new JSONObject();
@@ -145,8 +143,6 @@ public class WechatConfigController extends BaseController {
     @PostMapping("/saveButton")
     @ResponseBody
     public AjaxResult saveButton(Long id, String menu) {
-        System.out.println(menu);
-        System.out.println(id);
         WechatConfig wechatConfig = wechatConfigService.selectWechatConfigById(id);
         if (wechatConfig == null) {
             return error("配置信息不存在");
