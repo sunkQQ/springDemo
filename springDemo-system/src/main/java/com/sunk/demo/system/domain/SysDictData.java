@@ -1,5 +1,7 @@
 package com.sunk.demo.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.sunk.demo.common.annotation.Excel;
 import com.sunk.demo.common.annotation.Excel.ColumnType;
 import com.sunk.demo.common.constant.UserConstants;
@@ -14,11 +16,13 @@ import javax.validation.constraints.Size;
  * @author sunk
  * @date 2020年10月22日
  */
+@TableName(value = "sys_dict_data")
 public class SysDictData extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 字典编码 */
     @Excel(name = "字典编码", cellType = ColumnType.NUMERIC)
+    @TableId("dict_code")
     private Long dictCode;
 
     /** 字典排序 */

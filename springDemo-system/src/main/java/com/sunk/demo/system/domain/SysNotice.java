@@ -1,9 +1,9 @@
 package com.sunk.demo.system.domain;
 
+import com.sunk.demo.common.core.domain.BaseEntity;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.sunk.demo.common.core.domain.BaseEntity;
 
 /**
  * 通知公告表 sys_notice
@@ -28,6 +28,9 @@ public class SysNotice extends BaseEntity {
 
     /** 公告状态（0正常 1关闭） */
     private String status;
+
+    /** 备注 */
+    private String remark;
 
 	public Long getNoticeId() {
         return noticeId;
@@ -69,5 +72,13 @@ public class SysNotice extends BaseEntity {
 
 	public String getStatus() {
         return status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

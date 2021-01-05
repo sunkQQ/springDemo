@@ -10,7 +10,6 @@ import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.system.domain.SysConfig;
 import com.sunk.demo.system.mapper.SysConfigMapper;
 import com.sunk.demo.system.service.SysConfigService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -26,16 +25,13 @@ import java.util.List;
 @Service
 public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig> implements SysConfigService {
 
-	@Autowired
-	private SysConfigMapper sysConfigMapper;
-
 	/**
 	 * 项目启动时，初始化参数到缓存
 	 */
 	@PostConstruct
 	public void init() {
 		LambdaQueryWrapper<SysConfig> wrapper = new LambdaQueryWrapper<>();
-		List<SysConfig> configsList = sysConfigMapper.selectList(wrapper);
+		List<SysConfig> configsList = baseMapper.selectList(wrapper);
 		for (SysConfig config : configsList) {
 			CacheUtils.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
 		}
@@ -49,7 +45,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 	 */
 	@Override
 	public SysConfig selectConfigById(Long configId) {
-		return sysConfigMapper.selectById(configId);
+		return baseMapper.selectById(configId);
 	}
 
 	/**
@@ -66,7 +62,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 		}
 		LambdaQueryWrapper<SysConfig> wrapper = new LambdaQueryWrapper<>();
 		wrapper.eq(SysConfig::getConfigKey, configKey);
-		SysConfig retConfig = sysConfigMapper.selectOne(wrapper);
+		SysConfig retConfig = baseMapper.selectOne(wrapper);
 		if (StringUtils.isNotNull(retConfig)) {
 			CacheUtils.put(getCacheName(), getCacheKey(configKey), retConfig.getConfigValue());
 			return retConfig.getConfigValue();
@@ -103,7 +99,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 				}
 			}
 		}
-		return sysConfigMapper.selectList(wrapper);
+		return baseMapper.selectList(wrapper);
 	}
 
 	/**
@@ -114,7 +110,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 	 */
 	@Override
 	public int insertConfig(SysConfig config) {
-		int row = sysConfigMapper.insert(config);
+		int row = baseMapper.insert(config);
 		if (row > 0) {
 			CacheUtils.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
 		}
@@ -129,7 +125,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 	 */
 	@Override
 	public int updateConfig(SysConfig config) {
-		int row = sysConfigMapper.updateById(config);
+		int row = baseMapper.updateById(config);
 		if (row > 0) {
 			CacheUtils.put(getCacheName(), getCacheKey(config.getConfigKey()), config.getConfigValue());
 		}
@@ -144,7 +140,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 	 */
 	@Override
 	public int deleteConfigByIds(String ids) {
-		int count = sysConfigMapper.deleteBatchIds(Arrays.asList(ids));
+		int count = baseMapper.deleteBatchIds(Arrays.asList(ids));
 		if (count > 0) {
 			CacheUtils.removeAll(getCacheName());
 		}
@@ -171,7 +167,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigMapper, SysConfig
 
 		LambdaQueryWrapper<SysConfig> wrapper = new LambdaQueryWrapper<>();
 		wrapper.eq(SysConfig::getConfigKey, config.getConfigKey());
-		SysConfig info = sysConfigMapper.selectOne(wrapper);
+		SysConfig info = baseMapper.selectOne(wrapper);
 		if (StringUtils.isNotNull(info) && info.getConfigId().longValue() != configId.longValue()) {
 			return UserConstants.CONFIG_KEY_NOT_UNIQUE;
 		}

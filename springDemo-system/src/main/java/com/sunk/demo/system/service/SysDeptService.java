@@ -1,10 +1,11 @@
 package com.sunk.demo.system.service;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.sunk.demo.common.core.domain.Ztree;
 import com.sunk.demo.system.domain.SysDept;
 import com.sunk.demo.system.domain.SysRole;
+
+import java.util.List;
 
 /**
  * 部门管理 服务层
@@ -13,7 +14,7 @@ import com.sunk.demo.system.domain.SysRole;
  * @date 2020年10月26日
  */
 
-public interface SysDeptService {
+public interface SysDeptService extends IService<SysDept> {
 
 	/**
 	 * 查询部门管理数据

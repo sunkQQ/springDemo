@@ -1,10 +1,12 @@
 package com.sunk.demo.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.sunk.demo.common.core.domain.BaseEntity;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.sunk.demo.common.core.domain.BaseEntity;
 
 /**
  * 部门表 sys_dept
@@ -12,10 +14,12 @@ import com.sunk.demo.common.core.domain.BaseEntity;
  * @author sunk
  * @date 2020年10月22日
  */
+@TableName(value = "sys_dept")
 public class SysDept extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 部门ID */
+    @TableId("dept_id")
     private Long deptId;
 
     /** 父部门ID */

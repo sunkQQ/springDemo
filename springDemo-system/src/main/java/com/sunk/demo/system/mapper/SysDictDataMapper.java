@@ -1,10 +1,10 @@
 package com.sunk.demo.system.mapper;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.sunk.demo.system.domain.SysDictData;
 import org.apache.ibatis.annotations.Param;
 
-import com.sunk.demo.system.domain.SysDictData;
+import java.util.List;
 
 /**
  * 字典表 数据层
@@ -12,7 +12,7 @@ import com.sunk.demo.system.domain.SysDictData;
  * @author sunk
  * @date 2020年10月22日
  */
-public interface SysDictDataMapper {
+public interface SysDictDataMapper extends BaseMapper<SysDictData> {
     /**
      * 根据条件分页查询字典数据
      * 

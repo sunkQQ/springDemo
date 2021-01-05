@@ -1,10 +1,10 @@
 package com.sunk.demo.system.mapper;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.sunk.demo.system.domain.SysDept;
 import org.apache.ibatis.annotations.Param;
 
-import com.sunk.demo.system.domain.SysDept;
+import java.util.List;
 
 /**
  * 部门管理 数据层
@@ -12,7 +12,7 @@ import com.sunk.demo.system.domain.SysDept;
  * @author sunk
  * @date 2020年10月22日
  */
-public interface SysDeptMapper {
+public interface SysDeptMapper extends BaseMapper<SysDept> {
     /**
      * 查询部门人数
      * 

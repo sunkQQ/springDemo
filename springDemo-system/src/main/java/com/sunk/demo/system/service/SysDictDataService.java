@@ -1,8 +1,9 @@
 package com.sunk.demo.system.service;
 
-import java.util.List;
-
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.sunk.demo.system.domain.SysDictData;
+
+import java.util.List;
 
 /**
  * 字典 业务层
@@ -11,7 +12,7 @@ import com.sunk.demo.system.domain.SysDictData;
  * @date 2020年10月26日
  */
 
-public interface SysDictDataService {
+public interface SysDictDataService extends IService<SysDictData> {
 
 	/**
 	 * 根据条件分页查询字典数据
