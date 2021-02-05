@@ -16,7 +16,6 @@ import java.util.regex.Pattern;
  * @author sunk
  * @date 2020年10月19日
  */
-
 public final class HTMLFilter {
 
 	/**
@@ -39,6 +38,7 @@ public final class HTMLFilter {
 	private static final Pattern P_END_ARROW = Pattern.compile("^>");
 	// private static final Pattern P_BODY_TO_END =
 	// Pattern.compile("<([^>]*?)(?=<|$)");
+
 	private static final Pattern P_XML_CONTENT = Pattern.compile("(^|>)([^<]*?)(?=>)");
 	private static final Pattern P_STRAY_LEFT_ARROW = Pattern.compile("<([^>]*?)(?=<|$)");
 	private static final Pattern P_STRAY_RIGHT_ARROW = Pattern.compile("(^|>)([^<]*?)(?=>)");
@@ -48,7 +48,7 @@ public final class HTMLFilter {
 	private static final Pattern P_RIGHT_ARROW = Pattern.compile(">");
 	private static final Pattern P_BOTH_ARROWS = Pattern.compile("<>");
 
-	// @xxx could grow large... maybe use sesat's ReferenceMap
+	/** @xxx could grow large... maybe use sesat's ReferenceMap */
 	private static final ConcurrentMap<String, Pattern> P_REMOVE_PAIR_BLANKS = new ConcurrentHashMap<>();
 	private static final ConcurrentMap<String, Pattern> P_REMOVE_SELF_BLANKS = new ConcurrentHashMap<>();
 
@@ -110,28 +110,29 @@ public final class HTMLFilter {
 	public HTMLFilter() {
 		vAllowed = new HashMap<>();
 
-		final ArrayList<String> a_atts = new ArrayList<>();
-		a_atts.add("href");
-		a_atts.add("target");
-		vAllowed.put("a", a_atts);
+		final ArrayList<String> aAtts = new ArrayList<>();
+		aAtts.add("href");
+		aAtts.add("target");
+		vAllowed.put("a", aAtts);
 
-		final ArrayList<String> img_atts = new ArrayList<>();
-		img_atts.add("src");
-		img_atts.add("width");
-		img_atts.add("height");
-		img_atts.add("alt");
-		vAllowed.put("img", img_atts);
+		final ArrayList<String> imgAtts = new ArrayList<>();
+		imgAtts.add("src");
+		imgAtts.add("width");
+		imgAtts.add("height");
+		imgAtts.add("alt");
+		vAllowed.put("img", imgAtts);
 
-		final ArrayList<String> no_atts = new ArrayList<>();
-		vAllowed.put("b", no_atts);
-		vAllowed.put("strong", no_atts);
-		vAllowed.put("i", no_atts);
-		vAllowed.put("em", no_atts);
+		final ArrayList<String> noAtts = new ArrayList<>();
+		vAllowed.put("b", noAtts);
+		vAllowed.put("strong", noAtts);
+		vAllowed.put("i", noAtts);
+		vAllowed.put("em", noAtts);
 
 		vSelfClosingTags = new String[] { "img" };
 		vNeedClosingTags = new String[] { "a", "b", "strong", "i", "em" };
 		vDisallowed = new String[] {};
-		vAllowedProtocols = new String[] { "http", "mailto", "https" }; // no ftp.
+		// no ftp.
+		vAllowedProtocols = new String[] { "http", "mailto", "https" };
 		vProtocolAtts = new String[] { "src", "href" };
 		vRemoveBlanks = new String[] { "a", "b", "strong", "i", "em" };
 		vAllowedEntities = new String[] { "amp", "gt", "lt", "quot" };
@@ -175,7 +176,7 @@ public final class HTMLFilter {
 	}
 
 	// -----------------------------------------------------------------------------------------------------
-	// my versions of some PHP library functions
+	/** my versions of some PHP library functions */
 	public static String chr(final int decimal) {
 		return String.valueOf((char) decimal);
 	}
@@ -222,7 +223,8 @@ public final class HTMLFilter {
 		final Matcher m = P_COMMENTS.matcher(s);
 		final StringBuffer buf = new StringBuffer();
 		if (m.find()) {
-			final String match = m.group(1); // (.*?)
+			// (.*?)
+			final String match = m.group(1);
 			m.appendReplacement(buf, Matcher.quoteReplacement("<!--" + htmlSpecialChars(match) + "-->"));
 		}
 		m.appendTail(buf);
@@ -334,12 +336,16 @@ public final class HTMLFilter {
 				final List<String> paramNames = new ArrayList<>();
 				final List<String> paramValues = new ArrayList<>();
 				while (m2.find()) {
-					paramNames.add(m2.group(1)); // ([a-z0-9]+)
-					paramValues.add(m2.group(3)); // (.*?)
+					// ([a-z0-9]+)
+					paramNames.add(m2.group(1));
+					// (.*?)
+					paramValues.add(m2.group(3));
 				}
 				while (m3.find()) {
-					paramNames.add(m3.group(1)); // ([a-z0-9]+)
-					paramValues.add(m3.group(3)); // ([^\"\\s']+)
+					// ([a-z0-9]+)
+					paramNames.add(m3.group(1));
+					// ([^\"\\s']+)
+					paramValues.add(m3.group(3));
 				}
 
 				String paramName, paramValue;
@@ -450,8 +456,10 @@ public final class HTMLFilter {
 		// validate entities throughout the string
 		Matcher m = P_VALID_ENTITIES.matcher(s);
 		while (m.find()) {
-			final String one = m.group(1); // ([^&;]*)
-			final String two = m.group(2); // (?=(;|&|$))
+			// ([^&;]*)
+			final String one = m.group(1);
+			// (?=(;|&|$))
+			final String two = m.group(2);
 			m.appendReplacement(buf, Matcher.quoteReplacement(checkEntity(one, two)));
 		}
 		m.appendTail(buf);
@@ -464,9 +472,12 @@ public final class HTMLFilter {
 			StringBuffer buf = new StringBuffer();
 			Matcher m = P_VALID_QUOTES.matcher(s);
 			while (m.find()) {
-				final String one = m.group(1); // (>|^)
-				final String two = m.group(2); // ([^<]+?)
-				final String three = m.group(3); // (<|$)
+				// (>|^)
+				final String one = m.group(1);
+				// ([^<]+?)
+				final String two = m.group(2);
+				// (<|$)
+				final String three = m.group(3);
 				// 不替换双引号为&quot;，防止json格式无效 regexReplace(P_QUOTE, "&quot;", two)
 				m.appendReplacement(buf, Matcher.quoteReplacement(one + two + three));
 			}

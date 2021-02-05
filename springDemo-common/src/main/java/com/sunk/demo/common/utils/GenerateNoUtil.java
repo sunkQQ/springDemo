@@ -23,10 +23,10 @@ public class GenerateNoUtil {
      * @param tableNameEnum
      * @return
      */
-    public static Long getNextIDValue(TableNameEnum tableNameEnum) {
+    public static Long getNextIdValue(TableNameEnum tableNameEnum) {
         String appName = "sunk";
-        Long genNextIDValue = RedisUtil.incr(appName + "|#|" + tableNameEnum.getName(), 1L);
-        String moNumber = String.valueOf(genNextIDValue % MO);
+        Long genNextIdValue = RedisUtil.incr(appName + "|#|" + tableNameEnum.getName(), 1L);
+        String moNumber = String.valueOf(genNextIdValue % MO);
         String no = generateTime() + StringUtils.leftPad(moNumber.toString(), NumberConstants.INT_4, ZERO);
         return Long.valueOf(no);
     }

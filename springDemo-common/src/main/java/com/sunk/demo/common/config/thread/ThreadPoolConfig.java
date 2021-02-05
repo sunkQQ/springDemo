@@ -1,15 +1,14 @@
 package com.sunk.demo.common.config.thread;
 
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadPoolExecutor;
-
+import com.sunk.demo.common.utils.Threads;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import com.sunk.demo.common.utils.Threads;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 线程池配置
@@ -20,16 +19,16 @@ import com.sunk.demo.common.utils.Threads;
 @Configuration
 public class ThreadPoolConfig {
 
-	// 核心线程池大小
+	/** 核心线程池大小 */
 	private int corePoolSize = 50;
 
-	// 最大可创建的线程数
+	/** 最大可创建的线程数 */
 	private int maxPoolSize = 200;
 
-	// 队列最大长度
+	/** 队列最大长度 */
 	private int queueCapacity = 1000;
 
-	// 线程池维护线程所允许的空闲时间
+	/** 线程池维护线程所允许的空闲时间 */
 	private int keepAliveSeconds = 300;
 
 	@Bean(name = "threadPoolTaskExecutor")

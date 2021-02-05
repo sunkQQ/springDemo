@@ -11,9 +11,9 @@ import java.util.Arrays;
  * @author sunk
  * @date 2020/11/28
  */
-public class SHA1Util {
+public class Sha1Util1 {
 
-    public static String getSHA1(String token, String timestamp, String nonce) throws AesException {
+    public static String getSha1(String token, String timestamp, String nonce) throws AesException {
         try {
             String[] array = new String[]{token, timestamp, nonce};
             StringBuffer sb = new StringBuffer();

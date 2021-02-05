@@ -5,6 +5,7 @@ import com.sunk.demo.common.annotation.Excel.ColumnType;
 import com.sunk.demo.common.annotation.Excel.Type;
 import com.sunk.demo.common.annotation.Excels;
 import com.sunk.demo.common.config.Global;
+import com.sunk.demo.common.constant.NumberConstants;
 import com.sunk.demo.common.core.domain.AjaxResult;
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.common.exception.BusinessException;
@@ -136,7 +137,7 @@ public class ExcelUtil<T> {
 
 		if (rows > 0) {
 			// 定义一个map用于存放excel列的序号和field.
-			Map<String, Integer> cellMap = new HashMap<String, Integer>();
+			Map<String, Integer> cellMap = new HashMap<String, Integer>(NumberConstants.INT_16);
 			// 获取表头
 			Row heard = sheet.getRow(0);
 			for (int i = 0; i < heard.getPhysicalNumberOfCells(); i++) {
@@ -151,76 +152,89 @@ public class ExcelUtil<T> {
 			// 有数据时才处理 得到类的所有field.
 			Field[] allFields = clazz.getDeclaredFields();
 			// 定义一个map用于存放列的序号和field.
-			Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>();
+			Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>(NumberConstants.INT_16);
 			for (int col = 0; col < allFields.length; col++) {
 				Field field = allFields[col];
 				Excel attr = field.getAnnotation(Excel.class);
-				if (attr != null && (attr.type() == Type.ALL || attr.type() == type)) {
+				boolean flag = (attr.type() == Type.ALL || attr.type() == type);
+				if (attr != null && flag) {
 					// 设置类的私有字段属性可访问.
 					field.setAccessible(true);
 					Integer column = cellMap.get(attr.name());
 					fieldsMap.put(column, field);
 				}
 			}
-			for (int i = 1; i < rows; i++) {
-				// 从第2行开始取数据,默认第一行是表头.
-				Row row = sheet.getRow(i);
-				T entity = null;
-				for (Map.Entry<Integer, Field> entry : fieldsMap.entrySet()) {
-					Object val = this.getCellValue(row, entry.getKey());
-
-					// 如果不存在实例则新建.
-					entity = (entity == null ? clazz.newInstance() : entity);
-					// 从map中得到对应列的field.
-					Field field = fieldsMap.get(entry.getKey());
-					// 取得类型,并根据对象类型设置值.
-					Class<?> fieldType = field.getType();
-					if (String.class == fieldType) {
-						String s = Convert.toStr(val);
-						if (StringUtils.endsWith(s, ".0")) {
-							val = StringUtils.substringBefore(s, ".0");
-						} else {
-							String dateFormat = field.getAnnotation(Excel.class).dateFormat();
-							if (StringUtils.isNotEmpty(dateFormat)) {
-								val = DateUtils.parseDateToStr(dateFormat, (Date) val);
-							} else {
-								val = Convert.toStr(val);
-							}
-						}
-					} else if ((Integer.TYPE == fieldType) || (Integer.class == fieldType)) {
-						val = Convert.toInt(val);
-					} else if ((Long.TYPE == fieldType) || (Long.class == fieldType)) {
-						val = Convert.toLong(val);
-					} else if ((Double.TYPE == fieldType) || (Double.class == fieldType)) {
-						val = Convert.toDouble(val);
-					} else if ((Float.TYPE == fieldType) || (Float.class == fieldType)) {
-						val = Convert.toFloat(val);
-					} else if (BigDecimal.class == fieldType) {
-						val = Convert.toBigDecimal(val);
-					} else if (Date.class == fieldType) {
-						if (val instanceof String) {
-							val = DateUtils.parseDate(val);
-						} else if (val instanceof Double) {
-							val = DateUtil.getJavaDate((Double) val);
-						}
-					}
-					if (StringUtils.isNotNull(fieldType)) {
-						Excel attr = field.getAnnotation(Excel.class);
-						String propertyName = field.getName();
-						if (StringUtils.isNotEmpty(attr.targetAttr())) {
-							propertyName = field.getName() + "." + attr.targetAttr();
-						} else if (StringUtils.isNotEmpty(attr.readConverterExp())) {
-							val = reverseByExp(Convert.toStr(val), attr.readConverterExp(), attr.separator());
-						} else if (StringUtils.isNotEmpty(attr.dictType())) {
-							val = reverseDictByExp(Convert.toStr(val), attr.dictType(), attr.separator());
-						}
-						ReflectUtils.invokeSetter(entity, propertyName, val);
-					}
-				}
-				list.add(entity);
-			}
+			excelList(list, sheet, rows, fieldsMap);
 		}
 		return list;
+	}
+
+	/**
+	 *
+	 * @param list
+	 * @param sheet
+	 * @param rows
+	 * @param fieldsMap
+	 * @throws Exception
+	 */
+	private void excelList(List<T> list, Sheet sheet, int rows, Map<Integer, Field> fieldsMap) throws Exception {
+		for (int i = 1; i < rows; i++) {
+			// 从第2行开始取数据,默认第一行是表头.
+			Row row = sheet.getRow(i);
+			T entity = null;
+			for (Map.Entry<Integer, Field> entry : fieldsMap.entrySet()) {
+				Object val = this.getCellValue(row, entry.getKey());
+
+				// 如果不存在实例则新建.
+				entity = (entity == null ? clazz.newInstance() : entity);
+				// 从map中得到对应列的field.
+				Field field = fieldsMap.get(entry.getKey());
+				// 取得类型,并根据对象类型设置值.
+				Class<?> fieldType = field.getType();
+				if (String.class == fieldType) {
+					String s = Convert.toStr(val);
+					if (StringUtils.endsWith(s, ".0")) {
+						val = StringUtils.substringBefore(s, ".0");
+					} else {
+						String dateFormat = field.getAnnotation(Excel.class).dateFormat();
+						if (StringUtils.isNotEmpty(dateFormat)) {
+							val = DateUtils.parseDateToStr(dateFormat, (Date) val);
+						} else {
+							val = Convert.toStr(val);
+						}
+					}
+				} else if ((Integer.TYPE == fieldType) || (Integer.class == fieldType)) {
+					val = Convert.toInt(val);
+				} else if ((Long.TYPE == fieldType) || (Long.class == fieldType)) {
+					val = Convert.toLong(val);
+				} else if ((Double.TYPE == fieldType) || (Double.class == fieldType)) {
+					val = Convert.toDouble(val);
+				} else if ((Float.TYPE == fieldType) || (Float.class == fieldType)) {
+					val = Convert.toFloat(val);
+				} else if (BigDecimal.class == fieldType) {
+					val = Convert.toBigDecimal(val);
+				} else if (Date.class == fieldType) {
+					if (val instanceof String) {
+						val = DateUtils.parseDate(val);
+					} else if (val instanceof Double) {
+						val = DateUtil.getJavaDate((Double) val);
+					}
+				}
+				if (StringUtils.isNotNull(fieldType)) {
+					Excel attr = field.getAnnotation(Excel.class);
+					String propertyName = field.getName();
+					if (StringUtils.isNotEmpty(attr.targetAttr())) {
+						propertyName = field.getName() + "." + attr.targetAttr();
+					} else if (StringUtils.isNotEmpty(attr.readConverterExp())) {
+						val = reverseByExp(Convert.toStr(val), attr.readConverterExp(), attr.separator());
+					} else if (StringUtils.isNotEmpty(attr.dictType())) {
+						val = reverseDictByExp(Convert.toStr(val), attr.dictType(), attr.separator());
+					}
+					ReflectUtils.invokeSetter(entity, propertyName, val);
+				}
+			}
+			list.add(entity);
+		}
 	}
 
 	/**
@@ -328,7 +342,7 @@ public class ExcelUtil<T> {
 	 */
 	private Map<String, CellStyle> createStyles(Workbook wb) {
 		// 写入各条记录,每条记录对应excel表中的一行
-		Map<String, CellStyle> styles = new HashMap<String, CellStyle>();
+		Map<String, CellStyle> styles = new HashMap<String, CellStyle>(NumberConstants.INT_16);
 		CellStyle style = wb.createCellStyle();
 		style.setAlignment(HorizontalAlignment.CENTER);
 		style.setVerticalAlignment(VerticalAlignment.CENTER);
@@ -407,12 +421,12 @@ public class ExcelUtil<T> {
 		// 如果设置了提示信息则鼠标放上去提示.
 		if (StringUtils.isNotEmpty(attr.prompt())) {
 			// 这里默认设了2-101列提示.
-			setXSSFPrompt(sheet, "", attr.prompt(), 1, 100, column, column);
+			setXssfPrompt(sheet, "", attr.prompt(), 1, 100, column, column);
 		}
 		// 如果设置了combo属性则本列只能选择不能输入
 		if (attr.combo().length > 0) {
 			// 这里默认设了2-101列只能选择不能输入.
-			setXSSFValidation(sheet, attr.combo(), 1, 100, column, column);
+			setXssfValidation(sheet, attr.combo(), 1, 100, column, column);
 		}
 	}
 
@@ -464,7 +478,7 @@ public class ExcelUtil<T> {
 	 * @param firstCol      开始列
 	 * @param endCol        结束列
 	 */
-	public void setXSSFPrompt(Sheet sheet, String promptTitle, String promptContent, int firstRow, int endRow,
+	public void setXssfPrompt(Sheet sheet, String promptTitle, String promptContent, int firstRow, int endRow,
 			int firstCol, int endCol) {
 		DataValidationHelper helper = sheet.getDataValidationHelper();
 		DataValidationConstraint constraint = helper.createCustomConstraint("DD1");
@@ -486,7 +500,7 @@ public class ExcelUtil<T> {
 	 * @param endCol   结束列
 	 * @return 设置好的sheet.
 	 */
-	public void setXSSFValidation(Sheet sheet, String[] textlist, int firstRow, int endRow, int firstCol, int endCol) {
+	public void setXssfValidation(Sheet sheet, String[] textlist, int firstRow, int endRow, int firstCol, int endCol) {
 		DataValidationHelper helper = sheet.getDataValidationHelper();
 		// 加载下拉列表内容
 		DataValidationConstraint constraint = helper.createExplicitListConstraint(textlist);
@@ -693,7 +707,8 @@ public class ExcelUtil<T> {
 	 * 放到字段集合中
 	 */
 	private void putToField(Field field, Excel attr) {
-		if (attr != null && (attr.type() == Type.ALL || attr.type() == type)) {
+		boolean flag = (attr.type() == Type.ALL || attr.type() == type);
+		if (attr != null && flag) {
 			this.fields.add(new Object[] { field, attr });
 		}
 	}
@@ -740,7 +755,8 @@ public class ExcelUtil<T> {
 				if (cell.getCellTypeEnum() == CellType.NUMERIC || cell.getCellTypeEnum() == CellType.FORMULA) {
 					val = cell.getNumericCellValue();
 					if (HSSFDateUtil.isCellDateFormatted(cell)) {
-						val = DateUtil.getJavaDate((Double) val); // POI Excel 日期格式转换
+						// POI Excel 日期格式转换
+						val = DateUtil.getJavaDate((Double) val);
 					} else {
 						if ((Double) val % 1 > 0) {
 							val = new DecimalFormat("0.00").format(val);

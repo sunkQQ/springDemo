@@ -315,8 +315,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 			if (preCharIsUpperCase && curreCharIsUpperCase && !nexteCharIsUpperCase) {
 				sb.append(SEPARATOR);
-			} else if ((i != 0 && !preCharIsUpperCase) && curreCharIsUpperCase) {
-				sb.append(SEPARATOR);
+			} else if ((i != 0 && !preCharIsUpperCase)) {
+				if (curreCharIsUpperCase){
+					sb.append(SEPARATOR);
+				}
 			}
 			sb.append(Character.toLowerCase(c));
 		}
@@ -418,10 +420,12 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 		return Arrays.asList(lines);
 	}
 
-	public static ArrayList Dikaerji0(ArrayList al0) {
+	public static ArrayList dikaerji0(ArrayList al0) {
 
-		ArrayList a0 = (ArrayList) al0.get(0);// l1
-		ArrayList result = new ArrayList();// 组合的结果
+		// l1
+		ArrayList a0 = (ArrayList) al0.get(0);
+		// 组合的结果
+		ArrayList result = new ArrayList();
 		for (int i = 1; i < al0.size(); i++) {
 			ArrayList a1 = (ArrayList) al0.get(i);
 			ArrayList temp = new ArrayList();

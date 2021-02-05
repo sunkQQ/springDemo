@@ -192,7 +192,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int updateDept(SysDept dept) {
 		SysDept newParentDept = baseMapper.selectDeptById(dept.getParentId());
 		SysDept oldDept = selectDeptById(dept.getDeptId());

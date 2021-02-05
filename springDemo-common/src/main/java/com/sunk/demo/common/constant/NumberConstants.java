@@ -9,7 +9,7 @@ package com.sunk.demo.common.constant;
 public class NumberConstants {
 
 
-    // int数字
+    /** int数字 */
     public static final int INT_0 = 0;
     public static final int INT_1 = 1;
     public static final int INT_2 = 2;
@@ -47,6 +47,7 @@ public class NumberConstants {
     public static final int INT_61 = 61;
     public static final int INT_62 = 62;
     public static final int INT_63 = 63;
+    public static final int INT_64 = 64;
     public static final int INT_80 = 80;
     public static final int INT_99 = 99;
     public static final int INT_100 = 100;
@@ -84,12 +85,12 @@ public class NumberConstants {
     /** 一天的秒数 */
     public static final int DAY_OF_SECOND = 24 * 60 * 60;
 
-    // short数字
+    /** short数字 */
     public static final short SHORT_10 = (short) 10;
     public static final short SHORT_12 = (short) 12;
     public static final short SHORT_2000 = (short) 2000;
 
-    // Long数字
+    /** Long数字 */
     public static final long LONG_1 = 1L;
     public static final long LONG_2 = 2L;
     public static final long LONG_3 = 3L;
@@ -110,10 +111,10 @@ public class NumberConstants {
     public static final double EARTH_RADIUS = 6378137;
     public static final double RAD = Math.PI / 180.0;
 
-    // float数字
+    /** float数字 */
     public static final float FLOAT_005 = 0.05f;
 
-    // 字符串数字
+    /** 字符串数字 */
     public static final String STRING_0 = "0";
     public static final String STRING_1 = "1";
     public static final String STRING_7 = "7";

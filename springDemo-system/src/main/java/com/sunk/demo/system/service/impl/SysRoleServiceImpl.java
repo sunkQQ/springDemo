@@ -1,15 +1,5 @@
 package com.sunk.demo.system.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.sunk.demo.common.annotation.DataScope;
 import com.sunk.demo.common.constant.UserConstants;
 import com.sunk.demo.common.core.text.Convert;
@@ -25,6 +15,11 @@ import com.sunk.demo.system.mapper.SysRoleMapper;
 import com.sunk.demo.system.mapper.SysRoleMenuMapper;
 import com.sunk.demo.system.mapper.SysUserRoleMapper;
 import com.sunk.demo.system.service.SysRoleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
 
 /**
  * 角色 业务层处理
@@ -156,7 +151,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int insertRole(SysRole role) {
 		// 新增角色信息
 		roleMapper.insertRole(role);
@@ -170,7 +165,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int updateRole(SysRole role) {
 		// 修改角色信息
 		roleMapper.updateRole(role);
@@ -186,7 +181,7 @@ public class SysRoleServiceImpl implements SysRoleService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int authDataScope(SysRole role) {
 		// 修改角色信息
 		roleMapper.updateRole(role);

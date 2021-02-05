@@ -3,6 +3,7 @@ package com.sunk.demo.controller.shop;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sunk.demo.common.annotation.Log;
+import com.sunk.demo.common.constant.NumberConstants;
 import com.sunk.demo.common.core.controller.BaseController;
 import com.sunk.demo.common.core.domain.AjaxResult;
 import com.sunk.demo.common.core.page.TableDataInfo;
@@ -173,7 +174,7 @@ public class StoreGoodsController extends BaseController {
 			spec.setStoreSpecItems(specItems);
 		}
 
-		HashMap<String, Object> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<>(NumberConstants.INT_1);
 		map.put("data", specs);
 		// System.out.println(specs);
 		return AjaxResult.success("success", map);
@@ -243,7 +244,7 @@ public class StoreGoodsController extends BaseController {
 		SpecVO data = JSON.parseObject(jsonStr, SpecVO.class);
 
 		// Map<String,Object> map = (Map<String,Object>)jsonObject;
-		Map<String, List<Integer>> map2 = new HashMap<>();
+		Map<String, List<Integer>> map2 = new HashMap<>(NumberConstants.INT_16);
 		// 重新组合map有相同键值的组合成list
 		for (String str : data.getList()) {
 			Map<String, Object> map = (Map<String, Object>) JSONObject.parseObject(str);
@@ -263,7 +264,7 @@ public class StoreGoodsController extends BaseController {
 		}
 		Iterator<Map.Entry<String, List<Integer>>> it = map2.entrySet().iterator();
 
-		Map<String, Integer> unsortMap = new HashMap<String, Integer>();
+		Map<String, Integer> unsortMap = new HashMap<String, Integer>(NumberConstants.INT_16);
 
 		// 迭代map把原来值换成列表大小
 		while (it.hasNext()) {
@@ -293,7 +294,7 @@ public class StoreGoodsController extends BaseController {
 		if (ls.isEmpty()) {
 			return AjaxResult.success("success", "");
 		}
-		List Dlist = StringUtils.Dikaerji0(ls);
+		List dList = StringUtils.dikaerji0(ls);
 
 
 		// todo 组合数据
@@ -314,7 +315,7 @@ public class StoreGoodsController extends BaseController {
 		storeSpecGoodsPrice.setGoodsId(Long.valueOf(data.getGoodsId()));
 
 		// 开始迭代笛卡儿积
-		Iterator<ArrayList> iter = Dlist.iterator();
+		Iterator<ArrayList> iter = dList.iterator();
 		while (iter.hasNext()) {
 			// System.out.println(iter.next());
 			List<String> itemName = new ArrayList<>();
@@ -380,8 +381,8 @@ public class StoreGoodsController extends BaseController {
 	public AjaxResult saveSpecAttr(HttpServletRequest request) {
 		// 获取所有表单参数
 		Enumeration<String> paramNames = request.getParameterNames();
-		Map<String, Map<String, String>> specDataMap = new HashMap<>();
-		Map<String, String> attrDataMap = new HashMap<>();
+		Map<String, Map<String, String>> specDataMap = new HashMap<>(NumberConstants.INT_16);
+		Map<String, String> attrDataMap = new HashMap<>(NumberConstants.INT_16);
 		Map<String, String> tmpMap = null;
 		String goodsId = request.getParameter("goodsId");
 		String goodsType = request.getParameter("type_id");
@@ -414,7 +415,7 @@ public class StoreGoodsController extends BaseController {
 						String keyValue = builder.toString().trim();
 
 						if (!specDataMap.containsKey(keyOne)) {
-							tmpMap = new HashMap<>();
+							tmpMap = new HashMap<>(NumberConstants.INT_16);
 						}
 						tmpMap.put(keyTwo, keyValue);
 						specDataMap.put(keyOne, tmpMap);

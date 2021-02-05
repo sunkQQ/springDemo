@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
  * @author sunk
  * @date 2020年10月19日
  */
-
 public class JSONObject extends LinkedHashMap<String, Object> {
 
 	private static final long serialVersionUID = 1L;

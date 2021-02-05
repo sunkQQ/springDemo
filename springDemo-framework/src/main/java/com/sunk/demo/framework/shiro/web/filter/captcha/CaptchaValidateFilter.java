@@ -1,15 +1,14 @@
 package com.sunk.demo.framework.shiro.web.filter.captcha;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.shiro.web.filter.AccessControlFilter;
-
 import com.google.code.kaptcha.Constants;
 import com.sunk.demo.common.constant.ShiroConstants;
 import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.framework.util.ShiroUtils;
+import org.apache.shiro.web.filter.AccessControlFilter;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 验证码过滤器
@@ -50,7 +49,8 @@ public class CaptchaValidateFilter extends AccessControlFilter {
 			throws Exception {
 		HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 		// 验证码禁用 或不是表单提交 允许访问
-		if (captchaEnabled == false || !"post".equals(httpServletRequest.getMethod().toLowerCase())) {
+
+		if (captchaEnabled == false || !com.sunk.demo.common.constant.Constants.POST.equals(httpServletRequest.getMethod().toLowerCase())) {
 			return true;
 		}
 		return validateResponse(httpServletRequest,

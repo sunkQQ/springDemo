@@ -31,7 +31,7 @@ public class RedisUtil {
     private static RedisUtil that;
 
     @PostConstruct
-    protected void Init() {
+    protected void init() {
         that = this;
     }
 

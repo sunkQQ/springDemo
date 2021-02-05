@@ -166,9 +166,9 @@ public class DemoFormController {
 	 */
 	@GetMapping("/cxselect")
 	public String cxselect(ModelMap mmap) {
-		CxSelect cxSelectTB = new CxSelect();
-		cxSelectTB.setN("淘宝");
-		cxSelectTB.setV("taobao");
+		CxSelect cxSelectTb = new CxSelect();
+		cxSelectTb.setN("淘宝");
+		cxSelectTb.setV("taobao");
 		CxSelect cxSelectTm = new CxSelect();
 		cxSelectTm.setN("天猫");
 		cxSelectTm.setV("tm");
@@ -178,11 +178,11 @@ public class DemoFormController {
 		List<CxSelect> tmList = new ArrayList<CxSelect>();
 		tmList.add(cxSelectTm);
 		tmList.add(cxSelectJhs);
-		cxSelectTB.setS(tmList);
+		cxSelectTb.setS(tmList);
 
-		CxSelect cxSelectJD = new CxSelect();
-		cxSelectJD.setN("京东");
-		cxSelectJD.setV("jd");
+		CxSelect cxSelectJd = new CxSelect();
+		cxSelectJd.setN("京东");
+		cxSelectJd.setV("jd");
 		CxSelect cxSelectCs = new CxSelect();
 		cxSelectCs.setN("京东超市");
 		cxSelectCs.setV("jdcs");
@@ -192,11 +192,11 @@ public class DemoFormController {
 		List<CxSelect> jdList = new ArrayList<CxSelect>();
 		jdList.add(cxSelectCs);
 		jdList.add(cxSelectSx);
-		cxSelectJD.setS(jdList);
+		cxSelectJd.setS(jdList);
 
 		List<CxSelect> cxList = new ArrayList<CxSelect>();
-		cxList.add(cxSelectTB);
-		cxList.add(cxSelectJD);
+		cxList.add(cxSelectTb);
+		cxList.add(cxSelectJd);
 
 		mmap.put("data", JSON.toJSON(cxList));
 		return prefix + "/cxselect";

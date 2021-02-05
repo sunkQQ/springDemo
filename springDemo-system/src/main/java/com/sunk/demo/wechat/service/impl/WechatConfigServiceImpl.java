@@ -75,7 +75,7 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
      */
     @Override
     public int insertWechatConfig(WechatConfig wechatConfig) {
-        wechatConfig.setId(GenerateNoUtil.getNextIDValue(TableNameEnum.WECHAT_CONFIG));
+        wechatConfig.setId(GenerateNoUtil.getNextIdValue(TableNameEnum.WECHAT_CONFIG));
         wechatConfig.setCreateTime(DateUtils.getNowDate());
         return baseMapper.insert(wechatConfig);
     }

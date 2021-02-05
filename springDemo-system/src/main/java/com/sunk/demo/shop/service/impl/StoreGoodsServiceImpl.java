@@ -42,7 +42,7 @@ public class StoreGoodsServiceImpl implements StoreGoodsService {
 	protected StoreGoodsAttrService storeGoodsAttrService;
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int saveSpecAttr(Map<String, Map<String, String>> specDataMap, Map<String, String> attrDataMap,
 			String goodsId, String goodsType) {
 		// 新增或者更新规格

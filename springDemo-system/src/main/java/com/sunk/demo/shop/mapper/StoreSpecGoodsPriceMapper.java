@@ -1,8 +1,8 @@
 package com.sunk.demo.shop.mapper;
 
-import java.util.List;
-
 import com.sunk.demo.shop.domain.StoreSpecGoodsPrice;
+
+import java.util.List;
 
 /**
  * 商品规格关联价格Mapper接口
@@ -29,6 +29,11 @@ public interface StoreSpecGoodsPriceMapper {
 	 */
 	public List<StoreSpecGoodsPrice> selectStoreSpecGoodsPriceList(StoreSpecGoodsPrice storeSpecGoodsPrice);
 
+	/**
+	 * 获取规格字符串
+	 * @param goodsId
+	 * @return
+	 */
 	public String selectStoreSpecGoodsPriceItemStr(Long goodsId);
 
 	/**
@@ -63,5 +68,10 @@ public interface StoreSpecGoodsPriceMapper {
 	 */
 	public int deleteStoreSpecGoodsPriceByIds(String[] itemIds);
 
+	/**
+	 * 根据goodsid删除
+	 * @param goodsId
+	 * @return
+	 */
 	public int delStoreSpecGoodsPriceByGoodsId(int goodsId);
 }

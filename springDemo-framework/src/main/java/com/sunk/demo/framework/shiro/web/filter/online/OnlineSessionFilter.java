@@ -1,10 +1,11 @@
 package com.sunk.demo.framework.shiro.web.filter.online;
 
-import java.io.IOException;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
+import com.sunk.demo.common.constant.ShiroConstants;
+import com.sunk.demo.common.enums.OnlineStatus;
+import com.sunk.demo.framework.shiro.session.OnlineSession;
+import com.sunk.demo.framework.shiro.session.OnlineSessionDAO;
+import com.sunk.demo.framework.util.ShiroUtils;
+import com.sunk.demo.system.domain.SysUser;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
@@ -12,12 +13,9 @@ import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.sunk.demo.common.constant.ShiroConstants;
-import com.sunk.demo.common.enums.OnlineStatus;
-import com.sunk.demo.framework.shiro.session.OnlineSession;
-import com.sunk.demo.framework.shiro.session.OnlineSessionDAO;
-import com.sunk.demo.framework.util.ShiroUtils;
-import com.sunk.demo.system.domain.SysUser;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.IOException;
 
 /**
  * 自定义访问控制
@@ -83,7 +81,9 @@ public class OnlineSessionFilter extends AccessControlFilter {
 		return false;
 	}
 
-	// 跳转到登录页
+	/**
+	 * 跳转到登录页
+	 */
 	@Override
 	protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
 		WebUtils.issueRedirect(request, response, loginUrl);

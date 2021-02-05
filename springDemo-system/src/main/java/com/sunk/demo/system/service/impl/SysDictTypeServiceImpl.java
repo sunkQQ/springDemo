@@ -1,14 +1,5 @@
 package com.sunk.demo.system.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.sunk.demo.common.constant.UserConstants;
 import com.sunk.demo.common.core.domain.Ztree;
 import com.sunk.demo.common.core.text.Convert;
@@ -20,6 +11,13 @@ import com.sunk.demo.system.mapper.SysDictDataMapper;
 import com.sunk.demo.system.mapper.SysDictTypeMapper;
 import com.sunk.demo.system.service.SysDictTypeService;
 import com.sunk.demo.system.utils.DictUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 字典 业务层处理
@@ -163,7 +161,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int updateDictType(SysDictType dictType) {
 		SysDictType oldDict = dictTypeMapper.selectDictTypeById(dictType.getDictId());
 		dictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());

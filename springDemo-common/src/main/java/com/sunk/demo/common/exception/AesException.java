@@ -47,7 +47,8 @@ public class AesException extends  Exception {
 //		case GEN_RETURN_XML_ERROR:
 //			return "xml生成失败";
             default:
-                return null; // cannot be
+                // cannot be
+                return null;
         }
     }
 

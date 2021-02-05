@@ -1,9 +1,9 @@
 package com.sunk.demo.framework.config;
 
+import com.google.code.kaptcha.text.impl.DefaultTextCreator;
+
 import java.security.SecureRandom;
 import java.util.Random;
-
-import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 
 /**
  * 验证码文本生成器
@@ -30,7 +30,7 @@ public class KaptchaTextCreator extends DefaultTextCreator {
 			suChinese.append("*");
 			suChinese.append(CNUMBERS[y]);
 		} else if (randomoperands == 1) {
-			if (!(x == 0) && y % x == 0) {
+			if ((x != 0) && y % x == 0) {
 				result = y / x;
 				suChinese.append(CNUMBERS[y]);
 				suChinese.append("/");

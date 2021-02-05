@@ -51,7 +51,7 @@ public class WechatServerController {
         }
         try {
             WechatConfig wechatConfig = configList.get(NumberConstants.INT_0);
-            String sign = SHA1Util.getSHA1(wechatConfig.getToken(), tokenModel.getTimestamp(), tokenModel.getNonce());
+            String sign = SHA1Util.getSha1(wechatConfig.getToken(), tokenModel.getTimestamp(), tokenModel.getNonce());
             if (sign.equalsIgnoreCase(signature)) {
                 return tokenModel.getEchostr();
             }

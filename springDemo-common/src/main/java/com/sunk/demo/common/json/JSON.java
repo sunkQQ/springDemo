@@ -17,7 +17,6 @@ import java.io.OutputStream;
  * @author sunk
  * @date 2020年10月19日
  */
-
 public class JSON {
 	public static final String DEFAULT_FAIL = "\"Parse failed\"";
 	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();

@@ -15,19 +15,19 @@ import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.util.ClassUtils;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import javax.sql.DataSource;
 
+//@Configuration
 /**
  * Mybatis支持*匹配扫描包
- * 
+ *
  * @author sunk
  * @date 2020年10月19日
  */
-//@Configuration
 public class MyBatisConfig {
 
 	@Autowired

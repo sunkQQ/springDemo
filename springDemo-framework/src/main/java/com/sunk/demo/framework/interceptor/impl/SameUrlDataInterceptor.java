@@ -1,15 +1,14 @@
 package com.sunk.demo.framework.interceptor.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.sunk.demo.common.constant.NumberConstants;
+import com.sunk.demo.common.json.JSON;
+import com.sunk.demo.framework.interceptor.RepeatSubmitInterceptor;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.stereotype.Component;
-
-import com.sunk.demo.common.json.JSON;
-import com.sunk.demo.framework.interceptor.RepeatSubmitInterceptor;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 判断请求url和数据是否和上一次相同， 如果和上次相同，则是重复提交表单。 有效时间为10秒内。
@@ -42,7 +41,7 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {
 	public boolean isRepeatSubmit(HttpServletRequest request) throws Exception {
 		// 本次参数及系统时间
 		String nowParams = JSON.marshal(request.getParameterMap());
-		Map<String, Object> nowDataMap = new HashMap<String, Object>();
+		Map<String, Object> nowDataMap = new HashMap<String, Object>(NumberConstants.INT_2);
 		nowDataMap.put(REPEAT_PARAMS, nowParams);
 		nowDataMap.put(REPEAT_TIME, System.currentTimeMillis());
 
@@ -60,7 +59,7 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {
 				}
 			}
 		}
-		Map<String, Object> sessionMap = new HashMap<String, Object>();
+		Map<String, Object> sessionMap = new HashMap<String, Object>(NumberConstants.INT_1);
 		sessionMap.put(url, nowDataMap);
 		session.setAttribute(SESSION_REPEAT_KEY, sessionMap);
 		return false;

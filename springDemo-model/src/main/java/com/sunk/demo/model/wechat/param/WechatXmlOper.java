@@ -1,5 +1,6 @@
 package com.sunk.demo.model.wechat.param;
 
+import com.sunk.demo.common.constant.NumberConstants;
 import com.sunk.demo.model.wechat.message.response.TextResponseMessage;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
@@ -10,13 +11,13 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.Writer;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 微信xml操作
@@ -60,7 +61,7 @@ public class WechatXmlOper {
      */
     public static Map<String, String> parseXml(HttpServletRequest request) throws Exception {
         // 将解析结果存储在HashMap中
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<String, String>(NumberConstants.INT_16);
         StringBuilder sb = new StringBuilder();
         BufferedReader in = request.getReader();
         String line;

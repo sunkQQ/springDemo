@@ -1,17 +1,5 @@
 package com.sunk.demo.quartz.service.impl;
 
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import org.quartz.JobDataMap;
-import org.quartz.JobKey;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.sunk.demo.common.constant.ScheduleConstants;
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.common.exception.job.TaskException;
@@ -20,6 +8,16 @@ import com.sunk.demo.quartz.mapper.SysJobMapper;
 import com.sunk.demo.quartz.service.SysJobService;
 import com.sunk.demo.quartz.utils.CronUtils;
 import com.sunk.demo.quartz.utils.ScheduleUtils;
+import org.quartz.JobDataMap;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * 定时任务调度信息 服务层
@@ -76,7 +74,7 @@ public class SysJobServiceImpl implements SysJobService {
 	 * @param job 调度信息
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int pauseJob(SysJob job) throws SchedulerException {
 		Long jobId = job.getJobId();
 		String jobGroup = job.getJobGroup();
@@ -94,7 +92,7 @@ public class SysJobServiceImpl implements SysJobService {
 	 * @param job 调度信息
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int resumeJob(SysJob job) throws SchedulerException {
 		Long jobId = job.getJobId();
 		String jobGroup = job.getJobGroup();
@@ -112,7 +110,7 @@ public class SysJobServiceImpl implements SysJobService {
 	 * @param job 调度信息
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int deleteJob(SysJob job) throws SchedulerException {
 		Long jobId = job.getJobId();
 		String jobGroup = job.getJobGroup();
@@ -130,7 +128,7 @@ public class SysJobServiceImpl implements SysJobService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteJobByIds(String ids) throws SchedulerException {
 		Long[] jobIds = Convert.toLongArray(ids);
 		for (Long jobId : jobIds) {
@@ -145,7 +143,7 @@ public class SysJobServiceImpl implements SysJobService {
 	 * @param job 调度信息
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int changeStatus(SysJob job) throws SchedulerException {
 		int rows = 0;
 		String status = job.getStatus();
@@ -163,7 +161,7 @@ public class SysJobServiceImpl implements SysJobService {
 	 * @param job 调度信息
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void run(SysJob job) throws SchedulerException {
 		Long jobId = job.getJobId();
 		SysJob tmpObj = selectJobById(job.getJobId());
@@ -179,7 +177,7 @@ public class SysJobServiceImpl implements SysJobService {
 	 * @param job 调度信息 调度信息
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int insertJob(SysJob job) throws SchedulerException, TaskException {
 		job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
 		int rows = jobMapper.insertJob(job);
@@ -195,7 +193,7 @@ public class SysJobServiceImpl implements SysJobService {
 	 * @param job 调度信息
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int updateJob(SysJob job) throws SchedulerException, TaskException {
 		SysJob properties = selectJobById(job.getJobId());
 		int rows = jobMapper.updateJob(job);

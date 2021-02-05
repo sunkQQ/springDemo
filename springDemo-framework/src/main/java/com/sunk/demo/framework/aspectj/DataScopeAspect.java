@@ -1,7 +1,11 @@
 package com.sunk.demo.framework.aspectj;
 
-import java.lang.reflect.Method;
-
+import com.sunk.demo.common.annotation.DataScope;
+import com.sunk.demo.common.core.domain.BaseEntity;
+import com.sunk.demo.common.utils.StringUtils;
+import com.sunk.demo.framework.util.ShiroUtils;
+import com.sunk.demo.system.domain.SysRole;
+import com.sunk.demo.system.domain.SysUser;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,12 +14,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
-import com.sunk.demo.common.annotation.DataScope;
-import com.sunk.demo.common.core.domain.BaseEntity;
-import com.sunk.demo.common.utils.StringUtils;
-import com.sunk.demo.framework.util.ShiroUtils;
-import com.sunk.demo.system.domain.SysRole;
-import com.sunk.demo.system.domain.SysUser;
+import java.lang.reflect.Method;
 
 /**
  * 数据过滤处理
@@ -57,7 +56,7 @@ public class DataScopeAspect {
 	 */
 	public static final String DATA_SCOPE = "dataScope";
 
-	// 配置织入点
+	/** 配置织入点 */
 	@Pointcut("@annotation(com.sunk.demo.common.annotation.DataScope)")
 	public void dataScopePointCut() {
 	}

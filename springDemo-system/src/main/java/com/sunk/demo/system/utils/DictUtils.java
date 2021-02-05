@@ -1,13 +1,12 @@
 package com.sunk.demo.system.utils;
 
-import java.util.List;
-
-import org.springframework.stereotype.Component;
-
 import com.sunk.demo.common.constant.Constants;
 import com.sunk.demo.common.utils.CacheUtils;
 import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.system.domain.SysDictData;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 字典工具类
@@ -42,8 +41,8 @@ public class DictUtils {
 	public static List<SysDictData> getDictCache(String key) {
 		Object cacheObj = CacheUtils.get(getCacheName(), getCacheKey(key));
 		if (StringUtils.isNotNull(cacheObj)) {
-			List<SysDictData> DictDatas = StringUtils.cast(cacheObj);
-			return DictDatas;
+			List<SysDictData> dictDatas = StringUtils.cast(cacheObj);
+			return dictDatas;
 		}
 		return null;
 	}

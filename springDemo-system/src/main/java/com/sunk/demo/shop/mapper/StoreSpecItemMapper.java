@@ -1,8 +1,8 @@
 package com.sunk.demo.shop.mapper;
 
-import java.util.List;
-
 import com.sunk.demo.shop.domain.StoreSpecItem;
+
+import java.util.List;
 
 /**
  * 规格项Mapper接口
@@ -37,6 +37,11 @@ public interface StoreSpecItemMapper {
 	 */
 	public int insertStoreSpecItem(StoreSpecItem storeSpecItem);
 
+	/**
+	 * 批量新增规格
+	 * @param itemList
+	 * @return
+	 */
 	public int batchSpecItem(List<StoreSpecItem> itemList);
 
 	/**

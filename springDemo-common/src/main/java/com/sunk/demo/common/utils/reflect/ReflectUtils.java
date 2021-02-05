@@ -1,21 +1,15 @@
 package com.sunk.demo.common.utils.reflect;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Date;
-
+import com.sunk.demo.common.core.text.Convert;
+import com.sunk.demo.common.utils.DateUtils;
+import com.sunk.demo.common.utils.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sunk.demo.common.core.text.Convert;
-import com.sunk.demo.common.utils.DateUtils;
-import com.sunk.demo.common.utils.StringUtils;
+import java.lang.reflect.*;
+import java.util.Date;
 
 /**
  * 反射工具类. 提供调用getter/setter方法, 访问私有变量, 调用私有方法, 获取泛型类型Class, 被AOP过的真实类等工具函数.
@@ -244,8 +238,8 @@ public class ReflectUtils {
 	 * 改变private/protected的方法为public，尽量不调用实际改动的语句，避免JDK的SecurityManager抱怨。
 	 */
 	public static void makeAccessible(Method method) {
-		if ((!Modifier.isPublic(method.getModifiers()) || !Modifier.isPublic(method.getDeclaringClass().getModifiers()))
-				&& !method.isAccessible()) {
+		boolean flag = (!Modifier.isPublic(method.getModifiers()) || !Modifier.isPublic(method.getDeclaringClass().getModifiers()));
+		if (flag && !method.isAccessible()) {
 			method.setAccessible(true);
 		}
 	}
@@ -254,8 +248,9 @@ public class ReflectUtils {
 	 * 改变private/protected的成员变量为public，尽量不调用实际改动的语句，避免JDK的SecurityManager抱怨。
 	 */
 	public static void makeAccessible(Field field) {
-		if ((!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass().getModifiers())
-				|| Modifier.isFinal(field.getModifiers())) && !field.isAccessible()) {
+		boolean flag = (!Modifier.isPublic(field.getModifiers()) || !Modifier.isPublic(field.getDeclaringClass().getModifiers())
+				|| Modifier.isFinal(field.getModifiers()));
+		if (flag && !field.isAccessible()) {
 			field.setAccessible(true);
 		}
 	}

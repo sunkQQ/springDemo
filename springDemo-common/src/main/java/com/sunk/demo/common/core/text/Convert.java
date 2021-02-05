@@ -824,7 +824,7 @@ public class Convert {
 	 * @return
 	 */
 	public static String tosbc(String input, Set<Character> notConvertSet) {
-		char c[] = input.toCharArray();
+		char[] c = input.toCharArray();
 		for (int i = 0; i < c.length; i++) {
 			if (null != notConvertSet && notConvertSet.contains(c[i])) {
 				// 跳过不替换的字符
@@ -859,7 +859,7 @@ public class Convert {
 	 * @return
 	 */
 	public static String todbc(String text, Set<Character> notConvertSet) {
-		char c[] = text.toCharArray();
+		char[] c = text.toCharArray();
 		for (int i = 0; i < c.length; i++) {
 			if (null != notConvertSet && notConvertSet.contains(c[i])) {
 				// 跳过不替换的字符

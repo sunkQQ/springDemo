@@ -76,7 +76,7 @@ public class StoreSpecServiceImpl implements StoreSpecService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int insertStoreSpec(StoreSpec storeSpec) {
 		int rows = 1;
 		storeSpecMapper.insertStoreSpec(storeSpec);
@@ -102,7 +102,7 @@ public class StoreSpecServiceImpl implements StoreSpecService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int updateStoreSpec(StoreSpec storeSpec) {
 		int rows = 1;
 		storeSpecMapper.updateStoreSpec(storeSpec);

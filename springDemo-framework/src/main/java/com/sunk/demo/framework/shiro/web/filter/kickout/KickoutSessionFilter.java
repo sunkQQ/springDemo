@@ -62,7 +62,8 @@ public class KickoutSessionFilter extends AccessControlFilter {
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		Subject subject = getSubject(request, response);
-		if (!subject.isAuthenticated() && !subject.isRemembered() || maxSession == -1) {
+		boolean existed = !subject.isAuthenticated() && !subject.isRemembered() || maxSession == -1;
+		if (existed) {
 			// 如果没有登录或用户最大会话数为-1，直接进行之后的流程
 			return true;
 		}
@@ -155,7 +156,9 @@ public class KickoutSessionFilter extends AccessControlFilter {
 		this.sessionManager = sessionManager;
 	}
 
-	// 设置Cache的key的前缀
+	/**
+	 * 设置Cache的key的前缀
+ 	 */
 	public void setCacheManager(CacheManager cacheManager) {
 		// 必须和ehcache缓存配置中的缓存name一致
 		this.cache = cacheManager.getCache(ShiroConstants.SYS_USERCACHE);

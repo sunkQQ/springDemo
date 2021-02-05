@@ -1,24 +1,5 @@
 package com.sunk.demo.generator.service.impl;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.ByteArrayOutputStream;
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sunk.demo.common.constant.Constants;
@@ -34,6 +15,24 @@ import com.sunk.demo.generator.service.GenTableService;
 import com.sunk.demo.generator.util.GenUtils;
 import com.sunk.demo.generator.util.VelocityInitializer;
 import com.sunk.demo.generator.util.VelocityUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * 业务 服务层实现
@@ -115,7 +114,7 @@ public class GenTableServiceImpl implements GenTableService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void updateGenTable(GenTable genTable) {
 		String options = JSON.toJSONString(genTable.getParams());
 		genTable.setOptions(options);
@@ -134,7 +133,7 @@ public class GenTableServiceImpl implements GenTableService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void deleteGenTableByIds(String ids) {
 		genTableMapper.deleteGenTableByIds(Convert.toLongArray(ids));
 		genTableColumnMapper.deleteGenTableColumnByIds(Convert.toLongArray(ids));
@@ -147,7 +146,7 @@ public class GenTableServiceImpl implements GenTableService {
 	 * @param operName  操作人员
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public void importGenTable(List<GenTable> tableList, String operName) {
 		for (GenTable table : tableList) {
 			try {

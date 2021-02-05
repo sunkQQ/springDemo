@@ -1,32 +1,23 @@
 package com.sunk.demo.system.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.sunk.demo.common.annotation.DataScope;
 import com.sunk.demo.common.constant.UserConstants;
 import com.sunk.demo.common.core.text.Convert;
 import com.sunk.demo.common.exception.BusinessException;
 import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.common.utils.security.Md5Utils;
-import com.sunk.demo.system.domain.SysPost;
-import com.sunk.demo.system.domain.SysRole;
-import com.sunk.demo.system.domain.SysUser;
-import com.sunk.demo.system.domain.SysUserPost;
-import com.sunk.demo.system.domain.SysUserRole;
-import com.sunk.demo.system.mapper.SysPostMapper;
-import com.sunk.demo.system.mapper.SysRoleMapper;
-import com.sunk.demo.system.mapper.SysUserMapper;
-import com.sunk.demo.system.mapper.SysUserPostMapper;
-import com.sunk.demo.system.mapper.SysUserRoleMapper;
+import com.sunk.demo.system.domain.*;
+import com.sunk.demo.system.mapper.*;
 import com.sunk.demo.system.service.SysConfigService;
 import com.sunk.demo.system.service.SysUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用户 业务层处理
@@ -185,7 +176,7 @@ public class SysUserServiceImpl implements SysUserService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int insertUser(SysUser user) {
 		// 新增用户信息
 		int rows = userMapper.insertUser(user);
@@ -215,7 +206,7 @@ public class SysUserServiceImpl implements SysUserService {
 	 * @return 结果
 	 */
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public int updateUser(SysUser user) {
 		Long userId = user.getUserId();
 		// 删除用户与角色关联

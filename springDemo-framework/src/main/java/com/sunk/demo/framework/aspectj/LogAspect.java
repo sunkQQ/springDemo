@@ -1,8 +1,15 @@
 package com.sunk.demo.framework.aspectj;
 
-import java.lang.reflect.Method;
-import java.util.Map;
-
+import com.sunk.demo.common.annotation.Log;
+import com.sunk.demo.common.enums.BusinessStatus;
+import com.sunk.demo.common.json.JSON;
+import com.sunk.demo.common.utils.ServletUtils;
+import com.sunk.demo.common.utils.StringUtils;
+import com.sunk.demo.framework.manager.AsyncManager;
+import com.sunk.demo.framework.manager.factory.AsyncFactory;
+import com.sunk.demo.framework.util.ShiroUtils;
+import com.sunk.demo.system.domain.SysOperLog;
+import com.sunk.demo.system.domain.SysUser;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -14,16 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.sunk.demo.common.annotation.Log;
-import com.sunk.demo.common.enums.BusinessStatus;
-import com.sunk.demo.common.json.JSON;
-import com.sunk.demo.common.utils.ServletUtils;
-import com.sunk.demo.common.utils.StringUtils;
-import com.sunk.demo.framework.manager.AsyncManager;
-import com.sunk.demo.framework.manager.factory.AsyncFactory;
-import com.sunk.demo.framework.util.ShiroUtils;
-import com.sunk.demo.system.domain.SysOperLog;
-import com.sunk.demo.system.domain.SysUser;
+import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * 操作日志记录处理
@@ -37,7 +36,7 @@ public class LogAspect {
 
 	private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
 
-	// 配置织入点
+	/** 配置织入点 */
 	@Pointcut("@annotation(com.sunk.demo.common.annotation.Log)")
 	public void logPointCut() {
 	}
