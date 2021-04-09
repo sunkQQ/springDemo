@@ -1,13 +1,15 @@
 package com.sunk.demo.common.core.text;
 
-import com.sunk.demo.common.utils.StringUtils;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.text.NumberFormat;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
+
+import com.sunk.demo.common.utils.StringUtils;
 
 /**
  * 类型转换器
@@ -910,5 +912,28 @@ public class Convert {
 		}
 		return head + s.replaceAll("(零.)*零元", "元").replaceFirst("(零.)+", "").replaceAll("(零.)+", "零").replaceAll("^整$",
 				"零元整");
+	}
+
+	/**
+	 * 转换为List<String>集合
+	 *
+	 * @author sunk
+	 * @date 2020年10月14日
+	 *
+	 * @param str 被转换的值
+	 * @return
+	 */
+	public static List<String> toStrList(String str) {
+		return toStrList(",", str);
+	}
+
+	/**
+	 * 转换为List<String>集合
+	 * @param split 分隔符
+	 * @param str 被转换的值
+	 * @return
+	 */
+	public static List<String> toStrList(String split, String str) {
+		return Arrays.asList(str.split(split));
 	}
 }
