@@ -1,5 +1,14 @@
 package com.sunk.demo.system.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.sunk.demo.common.constant.UserConstants;
 import com.sunk.demo.common.core.domain.Ztree;
 import com.sunk.demo.common.core.text.Convert;
@@ -7,17 +16,10 @@ import com.sunk.demo.common.exception.BusinessException;
 import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.system.domain.SysDictData;
 import com.sunk.demo.system.domain.SysDictType;
-import com.sunk.demo.system.mapper.SysDictDataMapper;
 import com.sunk.demo.system.mapper.SysDictTypeMapper;
+import com.sunk.demo.system.service.SysDictDataService;
 import com.sunk.demo.system.service.SysDictTypeService;
 import com.sunk.demo.system.utils.DictUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 字典 业务层处理
@@ -31,8 +33,10 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 	@Autowired
 	private SysDictTypeMapper dictTypeMapper;
 
+//	@Autowired
+//	private SysDictDataMapper dictDataMapper;
 	@Autowired
-	private SysDictDataMapper dictDataMapper;
+	private SysDictDataService sysDictDataService;
 
 	/**
 	 * 项目启动时，初始化字典到缓存
@@ -41,7 +45,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 	public void init() {
 		List<SysDictType> dictTypeList = dictTypeMapper.selectDictTypeAll();
 		for (SysDictType dictType : dictTypeList) {
-			List<SysDictData> dictDatas = dictDataMapper.selectDictDataByType(dictType.getDictType());
+			List<SysDictData> dictDatas = sysDictDataService.selectDictDataByType(dictType.getDictType());
 			DictUtils.setDictCache(dictType.getDictType(), dictDatas);
 		}
 	}
@@ -79,7 +83,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 		if (StringUtils.isNotNull(dictDatas)) {
 			return dictDatas;
 		}
-		dictDatas = dictDataMapper.selectDictDataByType(dictType);
+		dictDatas = sysDictDataService.selectDictDataByType(dictType);
 		if (StringUtils.isNotNull(dictDatas)) {
 			DictUtils.setDictCache(dictType, dictDatas);
 			return dictDatas;
@@ -120,7 +124,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 		Long[] dictIds = Convert.toLongArray(ids);
 		for (Long dictId : dictIds) {
 			SysDictType dictType = selectDictTypeById(dictId);
-			if (dictDataMapper.countDictDataByType(dictType.getDictType()) > 0) {
+			if (sysDictDataService.countDictDataByType(dictType.getDictType()) > 0) {
 				throw new BusinessException(String.format("%1$s已分配,不能删除", dictType.getDictName()));
 			}
 		}
@@ -164,7 +168,7 @@ public class SysDictTypeServiceImpl implements SysDictTypeService {
 	@Transactional(rollbackFor = Exception.class)
 	public int updateDictType(SysDictType dictType) {
 		SysDictType oldDict = dictTypeMapper.selectDictTypeById(dictType.getDictId());
-		dictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());
+		sysDictDataService.updateDictDataType(oldDict.getDictType(), dictType.getDictType());
 		int row = dictTypeMapper.updateDictType(dictType);
 		if (row > 0) {
 			DictUtils.clearDictCache();
