@@ -4,6 +4,9 @@ import java.util.Date;
 
 import com.sunk.demo.common.annotation.Excel;
 import com.sunk.demo.common.core.domain.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * 商城会员信息对象 store_member
@@ -11,7 +14,9 @@ import com.sunk.demo.common.core.domain.BaseEntity;
  * @author sunk
  * @date 2020年10月27日
  */
-
+@Getter
+@Setter
+@ToString
 public class StoreMember extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -70,6 +75,9 @@ public class StoreMember extends BaseEntity {
 	/** 默认收货地址 */
 	private Integer addressId;
 
+	/** 会员个性签名 */
+	private String remark;
+
 	/** 会员状态0待审核 1-已审核 2-已拒绝 */
 	private Integer status;
 
@@ -80,155 +88,4 @@ public class StoreMember extends BaseEntity {
 	/** 审核时间 */
 	private Long statusTime;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setVipNo(String vipNo) {
-		this.vipNo = vipNo;
-	}
-
-	public String getVipNo() {
-		return vipNo;
-	}
-
-	public void setOpenid(String openid) {
-		this.openid = openid;
-	}
-
-	public String getOpenid() {
-		return openid;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setHeadimg(String headimg) {
-		this.headimg = headimg;
-	}
-
-	public String getHeadimg() {
-		return headimg;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-
-	public Integer getLevel() {
-		return level;
-	}
-
-	public void setTotalAmount(Double totalAmount) {
-		this.totalAmount = totalAmount;
-	}
-
-	public Double getTotalAmount() {
-		return totalAmount;
-	}
-
-	public void setUserMoney(Double userMoney) {
-		this.userMoney = userMoney;
-	}
-
-	public Double getUserMoney() {
-		return userMoney;
-	}
-
-	public void setDistributMoney(Double distributMoney) {
-		this.distributMoney = distributMoney;
-	}
-
-	public Double getDistributMoney() {
-		return distributMoney;
-	}
-
-	public void setFrozenMoney(Double frozenMoney) {
-		this.frozenMoney = frozenMoney;
-	}
-
-	public Double getFrozenMoney() {
-		return frozenMoney;
-	}
-
-	public void setUnderlingNumber(Integer underlingNumber) {
-		this.underlingNumber = underlingNumber;
-	}
-
-	public Integer getUnderlingNumber() {
-		return underlingNumber;
-	}
-
-	public void setPayPoints(Integer payPoints) {
-		this.payPoints = payPoints;
-	}
-
-	public Integer getPayPoints() {
-		return payPoints;
-	}
-
-	public void setAddressId(Integer addressId) {
-		this.addressId = addressId;
-	}
-
-	public Integer getAddressId() {
-		return addressId;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	public Date getCreateAt() {
-		return createAt;
-	}
-
-	public void setStatusTime(Long statusTime) {
-		this.statusTime = statusTime;
-	}
-
-	public Long getStatusTime() {
-		return statusTime;
-	}
 }

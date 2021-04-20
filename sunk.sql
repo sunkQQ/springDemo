@@ -459,6 +459,7 @@ insert into sys_dict_type values(7,  '通知类型', 'sys_notice_type',     '0',
 insert into sys_dict_type values(8,  '通知状态', 'sys_notice_status',   '0', 'admin', '2018-03-16 11-33-00', 'sunk', '2018-03-16 11-33-00', '通知状态列表');
 insert into sys_dict_type values(9,  '操作类型', 'sys_oper_type',       '0', 'admin', '2018-03-16 11-33-00', 'sunk', '2018-03-16 11-33-00', '操作类型列表');
 insert into sys_dict_type values(10, '系统状态', 'sys_common_status',   '0', 'admin', '2018-03-16 11-33-00', 'sunk', '2018-03-16 11-33-00', '登录状态列表');
+INSERT INTO `sys_dict_type`(`dict_id`, `dict_name`, `dict_type`, `status`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (100, '状态', 'status', '0', 'admin', '2021-04-20 20:41:24', 'admin', '2021-04-20 20:41:37', '状态 0、正常 1、停用');
 
 
 
@@ -514,6 +515,8 @@ insert into sys_dict_data values(26, 8,  '生成代码', '8',       'sys_oper_ty
 insert into sys_dict_data values(27, 9,  '清空数据', '9',       'sys_oper_type',       '',   'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'sunk', '2018-03-16 11-33-00', '清空操作');
 insert into sys_dict_data values(28, 1,  '成功',     '0',       'sys_common_status',   '',   'primary', 'N', '0', 'admin', '2018-03-16 11-33-00', 'sunk', '2018-03-16 11-33-00', '正常状态');
 insert into sys_dict_data values(29, 2,  '失败',     '1',       'sys_common_status',   '',   'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'sunk', '2018-03-16 11-33-00', '停用状态');
+INSERT INTO `sys_dict_data`(`dict_code`, `dict_sort`, `dict_label`, `dict_value`, `dict_type`, `css_class`, `list_class`, `is_default`, `status`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (100, 0, '正常', ' 0', 'status', '', 'success', 'Y', '0', 'admin', '2021-04-20 20:42:16', 'admin', '2021-04-20 20:45:24', '状态 0、正常');
+INSERT INTO `sys_dict_data`(`dict_code`, `dict_sort`, `dict_label`, `dict_value`, `dict_type`, `css_class`, `list_class`, `is_default`, `status`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`) VALUES (101, 1, '停用', '1', 'status', '', 'danger', 'N', '0', 'admin', '2021-04-20 20:43:33', 'admin', '2021-04-20 20:45:18', '状态  1、停用');
 
 
 
