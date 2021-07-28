@@ -8,5 +8,9 @@ CREATE TABLE `wechat_config`(
     `status`         int(3) DEFAULT NULL COMMENT '状态 0、正常 1、停用',
     `replaycontent`  text COMMENT '关注回复内容',
     `menus`          text COMMENT '菜单',
+    `create_by`      varchar(64)  DEFAULT NULL COMMENT '创建者',
+    `create_time`    datetime     DEFAULT NULL COMMENT '创建时间',
+    `update_by`      varchar(64)  DEFAULT NULL COMMENT '修改者',
+    `update_time`    datetime     DEFAULT NULL COMMENT '修改时间',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
