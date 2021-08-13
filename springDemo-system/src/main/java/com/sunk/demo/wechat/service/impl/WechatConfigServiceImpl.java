@@ -1,10 +1,15 @@
 package com.sunk.demo.wechat.service.impl;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sunk.demo.api.wechat.WechatMenuClientApi;
-import com.sunk.demo.common.enums.TableNameEnum;
 import com.sunk.demo.common.exception.BusinessException;
 import com.sunk.demo.common.utils.DateUtils;
 import com.sunk.demo.common.utils.GenerateNoUtil;
@@ -12,11 +17,6 @@ import com.sunk.demo.common.utils.StringUtils;
 import com.sunk.demo.wechat.domain.WechatConfig;
 import com.sunk.demo.wechat.mapper.WechatConfigMapper;
 import com.sunk.demo.wechat.service.IWechatConfigService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * 公众号设置Service业务层处理
@@ -75,7 +75,7 @@ public class WechatConfigServiceImpl extends ServiceImpl<WechatConfigMapper, Wec
      */
     @Override
     public int insertWechatConfig(WechatConfig wechatConfig) {
-        wechatConfig.setId(GenerateNoUtil.getNextIdValue(TableNameEnum.WECHAT_CONFIG));
+        wechatConfig.setId(GenerateNoUtil.getNextIdValue());
         wechatConfig.setCreateTime(DateUtils.getNowDate());
         return baseMapper.insert(wechatConfig);
     }
