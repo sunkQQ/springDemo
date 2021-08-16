@@ -1,26 +1,28 @@
 package com.sunk.demo.controller.wechat;
 
-import com.sunk.demo.common.annotation.Log;
-import com.sunk.demo.common.constant.NumberConstants;
-import com.sunk.demo.common.constant.WechatConsts;
-import com.sunk.demo.common.enums.BusinessType;
-import com.sunk.demo.common.exception.AesException;
-import com.sunk.demo.common.utils.security.SHA1Util;
-import com.sunk.demo.model.wechat.message.response.TextResponseMessage;
-import com.sunk.demo.model.wechat.param.CheckModel;
-import com.sunk.demo.model.wechat.param.WechatXmlOper;
-import com.sunk.demo.wechat.domain.WechatConfig;
-import com.sunk.demo.wechat.service.IWechatConfigService;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Map;
+import com.sunk.demo.common.annotation.Log;
+import com.sunk.demo.common.constant.NumberConstants;
+import com.sunk.demo.common.constant.WechatConsts;
+import com.sunk.demo.common.enums.BusinessType;
+import com.sunk.demo.common.exception.AesException;
+import com.sunk.demo.common.utils.security.Sha1Util;
+import com.sunk.demo.model.wechat.message.response.TextResponseMessage;
+import com.sunk.demo.model.wechat.param.CheckModel;
+import com.sunk.demo.model.wechat.param.WechatXmlOper;
+import com.sunk.demo.wechat.domain.WechatConfig;
+import com.sunk.demo.wechat.service.IWechatConfigService;
 
 /**
  * 公众号相关
@@ -51,7 +53,7 @@ public class WechatServerController {
         }
         try {
             WechatConfig wechatConfig = configList.get(NumberConstants.INT_0);
-            String sign = SHA1Util.getSha1(wechatConfig.getToken(), tokenModel.getTimestamp(), tokenModel.getNonce());
+            String sign = Sha1Util.getSha1(wechatConfig.getToken(), tokenModel.getTimestamp(), tokenModel.getNonce());
             if (sign.equalsIgnoreCase(signature)) {
                 return tokenModel.getEchostr();
             }
