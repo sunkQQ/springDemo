@@ -17,6 +17,10 @@ public class GenerateNoUtil {
         return Long.valueOf(no);
     }
 
+    /**
+     * 获取时间
+     * @return yyDD
+     */
     private static String generateTime() {
         return DateUtils.dateTimeNow(DateUtils.YYDD);
     }
