@@ -1,9 +1,9 @@
 package com.sunk.demo.common.utils.security;
 
-import com.sunk.demo.common.exception.AesException;
-
 import java.security.MessageDigest;
 import java.util.Arrays;
+
+import com.sunk.demo.common.exception.AesException;
 
 /**
  * SHA1加密
@@ -11,7 +11,7 @@ import java.util.Arrays;
  * @author sunk
  * @date 2020/11/28
  */
-public class Sha1Util1 {
+public class Sha1Util {
 
     public static String getSha1(String token, String timestamp, String nonce) throws AesException {
         try {
