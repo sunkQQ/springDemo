@@ -9,7 +9,7 @@ package com.sunk.demo.common.utils;
 public class GenerateNoUtil {
 
     /**
-     * 据KEY生成全局ID
+     * 生成全局ID
      * @return
      */
     public static Long getNextIdValue() {
