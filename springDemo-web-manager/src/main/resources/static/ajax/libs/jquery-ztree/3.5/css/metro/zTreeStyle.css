@@ -74,15 +74,15 @@ website:    http://code.google.com/p/jquerytree/
 .ztree li span.button.ico_docu{margin-right:2px; background-position: -147px -42px; vertical-align:top; *vertical-align:middle}
 .ztree li span.button.edit {margin-left:2px; margin-right: -1px; background-position: -189px -21px; vertical-align:top; *vertical-align:middle}
 .ztree li span.button.edit:hover {
-  background-position: -168px -21px;
+    background-position: -168px -21px;
 }
 .ztree li span.button.remove {margin-left:2px; margin-right: -1px; background-position: -189px -42px; vertical-align:top; *vertical-align:middle}
 .ztree li span.button.remove:hover {
-  background-position: -168px -42px;
+    background-position: -168px -42px;
 }
 .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position: -189px 0; vertical-align:top; *vertical-align:middle}
 .ztree li span.button.add:hover {
-  background-position: -168px 0;
+    background-position: -168px 0;
 }
 .ztree li span.button.ico_loading{margin-right:2px; background:url(./img/loading.gif) no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle}
 
