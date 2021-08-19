@@ -9,7 +9,9 @@ package com.sunk.demo.common.constant;
 public class NumberConstants {
 
 
-    /** int数字 */
+    /**
+     * int数字
+     */
     public static final int INT_0 = 0;
     public static final int INT_1 = 1;
     public static final int INT_2 = 2;
@@ -68,29 +70,45 @@ public class NumberConstants {
     public static final int INT_2000 = 2000;
     public static final int INT_1024 = 1024;
     public static final int INT_1800 = 1800;
+    public static final int INT_1900 = 1900;
     public static final int INT_5000 = 5000;
     public static final int INT_6000 = 6000;
+    public static final int INT_9999 = 9999;
     public static final int INT_10000 = 10000;
     public static final int INT_60000 = 60000;
     public static final int INT_100000 = 100000;
 
-    /** 一秒的毫秒数 */
+    /**
+     * 一秒的毫秒数
+     */
     public static final int SECOND = 1000;
-    /** 一分钟的毫秒数 */
+    /**
+     * 一分钟的毫秒数
+     */
     public static final int MINUTE = 60 * SECOND;
-    /** 一小数的毫秒数 */
+    /**
+     * 一小数的毫秒数
+     */
     public static final int HOUR = 60 * MINUTE;
-    /** 一天的毫秒数 */
+    /**
+     * 一天的毫秒数
+     */
     public static final int DAY = 24 * HOUR;
-    /** 一天的秒数 */
+    /**
+     * 一天的秒数
+     */
     public static final int DAY_OF_SECOND = 24 * 60 * 60;
 
-    /** short数字 */
+    /**
+     * short数字
+     */
     public static final short SHORT_10 = (short) 10;
     public static final short SHORT_12 = (short) 12;
     public static final short SHORT_2000 = (short) 2000;
 
-    /** Long数字 */
+    /**
+     * Long数字
+     */
     public static final long LONG_1 = 1L;
     public static final long LONG_2 = 2L;
     public static final long LONG_3 = 3L;
@@ -101,20 +119,28 @@ public class NumberConstants {
     public static final long LONG_1000 = 1000L;
     public static final long DAY_OF_MINUTE = 24 * 60L;
     public static final long APP_PUSH_CODE = 320161018000008L;
-    /** 5M */
+    /**
+     * 5M
+     */
     public static final long LONG_5MB = 1024 * 1024 * 5;
 
     // double数字
-    /** 经纬度计算 */
+    /**
+     * 经纬度计算
+     */
     public static final double DEGREE = (24901 * 1609) / 360.0;
     public static final double PI = 3.14159265;
     public static final double EARTH_RADIUS = 6378137;
     public static final double RAD = Math.PI / 180.0;
 
-    /** float数字 */
+    /**
+     * float数字
+     */
     public static final float FLOAT_005 = 0.05f;
 
-    /** 字符串数字 */
+    /**
+     * 字符串数字
+     */
     public static final String STRING_0 = "0";
     public static final String STRING_1 = "1";
     public static final String STRING_7 = "7";
