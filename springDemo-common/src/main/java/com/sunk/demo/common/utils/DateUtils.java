@@ -539,6 +539,20 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         return dateToString(cal.getTime(), YYYY_MM_DD);
     }
 
+    /**
+     * 获取当前时间的整点小时时间
+     *
+     * @param date
+     * @return
+     */
+    private static Date getCurrHourTime(Date date) {
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(date);
+        ca.set(Calendar.MINUTE, 0);
+        ca.set(Calendar.SECOND, 0);
+        return ca.getTime();
+    }
+
     public static void main(String[] args) {
         System.out.println(parseDate("2020-10-14"));
     }
