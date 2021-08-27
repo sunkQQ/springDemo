@@ -155,7 +155,7 @@ var table = {
             // 获取实例ID，如存在多个返回#id1,#id2 delimeter分隔符
             getOptionsIds: function(separator) {
                 var _separator = $.common.isEmpty(separator) ? "," : separator;
-                var optionsIds = "";
+                var optionsIds = "";  
                 $.each(table.config, function(key, value){
                     optionsIds += "#" + key + _separator;
                 });
@@ -172,7 +172,7 @@ var table = {
                     isAsc:          params.order
                 };
                 var currentId = $.common.isEmpty(table.options.formId) ? $('form').attr('id') : table.options.formId;
-                return $.extend(curParams, $.common.formToJSON(currentId));
+                return $.extend(curParams, $.common.formToJSON(currentId)); 
             },
             // 请求获取数据后处理回调函数
             responseHandler: function(res) {
@@ -680,6 +680,14 @@ var table = {
                 } else if (table.options.type == table_type.bootstrapTreeTable) {
                     $("#" + tableId).bootstrapTreeTable('refresh', []);
                 }
+                if ($.common.isNotEmpty(startLayDate) && $.common.isNotEmpty(endLayDate)) {
+                    endLayDate.config.min.year = '';
+                    endLayDate.config.min.month = '';
+                    endLayDate.config.min.date = '';
+                    startLayDate.config.max.year = '2099';
+                    startLayDate.config.max.month = '12';
+                    startLayDate.config.max.date = '31';
+                 }
             },
             // 获取选中复选框项
             selectCheckeds: function(name) {
@@ -754,13 +762,13 @@ var table = {
             // 消息提示并刷新父窗体
             msgReload: function(msg, type) {
                 layer.msg(msg, {
-                        icon: $.modal.icon(type),
-                        time: 500,
-                        shade: [0.1, '#8F8F8F']
-                    },
-                    function() {
-                        $.modal.reload();
-                    });
+                    icon: $.modal.icon(type),
+                    time: 500,
+                    shade: [0.1, '#8F8F8F']
+                },
+                function() {
+                    $.modal.reload();
+                });
             },
             // 错误提示
             alertError: function(content) {
@@ -843,9 +851,9 @@ var table = {
             },
             // 弹出层指定参数选项
             openOptions: function (options) {
-                var _url = $.common.isEmpty(options.url) ? "/404.html" : options.url;
-                var _title = $.common.isEmpty(options.title) ? "系统窗口" : options.title;
-                var _width = $.common.isEmpty(options.width) ? "800" : options.width;
+                var _url = $.common.isEmpty(options.url) ? "/404.html" : options.url; 
+                var _title = $.common.isEmpty(options.title) ? "系统窗口" : options.title; 
+                var _width = $.common.isEmpty(options.width) ? "800" : options.width; 
                 var _height = $.common.isEmpty(options.height) ? ($(window).height() - 50) : options.height;
                 var _btn = ['<i class="fa fa-check"></i> 确认', '<i class="fa fa-close"></i> 关闭'];
                 // 如果是移动端，就使用自适应大小弹窗
@@ -877,6 +885,7 @@ var table = {
                     content: _url,
                     shadeClose: $.common.isEmpty(options.shadeClose) ? true : options.shadeClose,
                     skin: options.skin,
+                    // options.btn设置为0表示不显示按钮
                     btn: $.common.isEmpty(options.btn) ? _btn : options.btn,
                     yes: options.yes,
                     cancel: function () {
@@ -1005,7 +1014,7 @@ var table = {
                     width: width,
                     height: height,
                     url: _url,
-                    skin: 'layui-layer-gray',
+                    skin: 'layui-layer-gray', 
                     btn: ['关闭'],
                     yes: function (index, layero) {
                         layer.close(index);
@@ -1559,12 +1568,12 @@ var table = {
                 if (!date) return;
                 if (!format) format = "yyyy-MM-dd";
                 switch (typeof date) {
-                    case "string":
-                        date = new Date(date.replace(/-/, "/"));
-                        break;
-                    case "number":
-                        date = new Date(date);
-                        break;
+                case "string":
+                    date = new Date(date.replace(/-/, "/"));
+                    break;
+                case "number":
+                    date = new Date(date);
+                    break;
                 }
                 if (!date instanceof Date) return;
                 var dict = {
@@ -1581,9 +1590,9 @@ var table = {
                     "ss": ("" + (date.getSeconds() + 100)).substr(1)
                 };
                 return format.replace(/(yyyy|MM?|dd?|HH?|ss?|mm?)/g,
-                    function() {
-                        return dict[arguments[0]];
-                    });
+                function() {
+                    return dict[arguments[0]];
+                });
             },
             // 获取节点数据，支持多层级访问
             getItemField: function (item, field) {
@@ -1658,11 +1667,11 @@ var table = {
             },
             // 获取obj对象长度
             getLength: function(obj) {
-                var count = 0;
+                var count = 0;　　
                 for (var i in obj) {
                     if (obj.hasOwnProperty(i)) {
                         count++;
-                    }
+                    }　　
                 }
                 return count;
             },

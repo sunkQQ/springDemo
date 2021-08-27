@@ -198,10 +198,8 @@
 		        onClick : zOnClick
 		    };
 			$.tree.init(options);
-			console.log("11111111111111");
+			
 			function zOnClick(event, treeId, treeNode) {
-				console.log(treeNode.id);
-				console.log(treeNode.pId);
 				$("#deptId").val(treeNode.id);
 				$("#parentId").val(treeNode.pId);
 				$.table.search();
