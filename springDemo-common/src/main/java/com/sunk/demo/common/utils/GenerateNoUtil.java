@@ -22,6 +22,6 @@ public class GenerateNoUtil {
      * @return yyDD
      */
     private static String generateTime() {
-        return DateUtils.dateTimeNow(DateUtils.YYDD);
+        return DateUtils.dateTimeNow(DateUtils.YYMM);
     }
 }
