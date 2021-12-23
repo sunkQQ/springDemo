@@ -18,6 +18,6 @@ public class SpringDemoManagerApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDemoManagerApplication.class, args);
-		System.out.println(StringConstants.IMG);
+		log.info(StringConstants.IMG);
 	}
 }
